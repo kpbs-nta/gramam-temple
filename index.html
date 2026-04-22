@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sree Krishna Temple</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+Malayalam:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --gold: #c9972b;
+      --gold-light: #f0c050;
+      --gold-pale: #fdf3d0;
+      --deep: #1a0a00;
+      --maroon: #6b1a1a;
+      --saffron: #e8621a;
+      --cream: #fdf6e3;
+      --dark-bg: #0d0500;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark-bg);
+      color: var(--cream);
+      font-family: 'Crimson Pro', Georgia, serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 50% 30%, #3d1500 0%, #1a0800 40%, #0d0500 100%);
+    }
+
+    /* Decorative mandala rings */
+    .mandala-bg {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .mandala-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(201,151,43,0.12);
+      animation: rotateSlow linear infinite;
+    }
+    .mandala-ring:nth-child(1) { width: 300px; height: 300px; border-width: 2px; border-color: rgba(201,151,43,0.25); animation-duration: 40s; }
+    .mandala-ring:nth-child(2) { width: 500px; height: 500px; animation-duration: 60s; animation-direction: reverse; }
+    .mandala-ring:nth-child(3) { width: 700px; height: 700px; animation-duration: 80s; }
+    .mandala-ring:nth-child(4) { width: 900px; height: 900px; animation-duration: 100s; animation-direction: reverse; }
+    .mandala-ring:nth-child(5) { width: 1100px; height: 1100px; animation-duration: 120s; }
+
+    @keyframes rotateSlow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* Om symbol */
+    .om-symbol {
+      font-size: 5rem;
+      color: var(--gold);
+      filter: drop-shadow(0 0 30px rgba(201,151,43,0.7));
+      animation: glowPulse 3s ease-in-out infinite;
+      margin-bottom: 1rem;
+      line-height: 1;
+    }
+    @keyframes glowPulse {
+      0%, 100% { filter: drop-shadow(0 0 20px rgba(201,151,43,0.5)); }
+      50% { filter: drop-shadow(0 0 50px rgba(240,192,80,0.9)); }
+    }
+
+    .hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      font-weight: 700;
+      color: var(--gold-light);
+      text-shadow: 0 0 60px rgba(201,151,43,0.5), 0 2px 4px rgba(0,0,0,0.8);
+      letter-spacing: 0.05em;
+      line-height: 1.2;
+      animation: fadeUp 1.2s ease both;
+    }
+    .hero-subtitle {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(0.9rem, 2.5vw, 1.4rem);
+      color: var(--saffron);
+      letter-spacing: 0.3em;
+      margin-top: 0.5rem;
+      text-transform: uppercase;
+      animation: fadeUp 1.4s ease both;
+    }
+    .hero-malayalam {
+      font-family: 'Noto Serif Malayalam', serif;
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      color: rgba(253,243,208,0.75);
+      margin-top: 1rem;
+      animation: fadeUp 1.6s ease both;
+    }
+    .hero-divider {
+      width: 200px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1.5rem auto;
+      animation: fadeUp 1.6s ease both;
+    }
+    .hero-verse {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-style: italic;
+      color: rgba(253,246,227,0.7);
+      max-width: 500px;
+      line-height: 1.8;
+      animation: fadeUp 1.8s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scroll indicator */
+    .scroll-cue {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(201,151,43,0.6);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: fadeIn 3s ease both;
+    }
+    .scroll-cue span { animation: bounce 2s ease infinite; display: block; }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,5,0,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,151,43,0.25);
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: rgba(253,243,208,0.75);
+      text-decoration: none;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      padding: 0.4rem 1rem;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    nav a:hover {
+      color: var(--gold-light);
+      border-color: rgba(201,151,43,0.4);
+      background: rgba(201,151,43,0.08);
+    }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 5rem 1.5rem; }
+    .section-inner { max-width: 1000px; margin: 0 auto; }
+
+    .section-heading {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      color: var(--gold-light);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .section-ornament {
+      text-align: center;
+      color: var(--gold);
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.7;
+      letter-spacing: 1rem;
+    }
+
+    /* ─── ABOUT ─── */
+    #about {
+      background: linear-gradient(180deg, #0d0500 0%, #1a0800 50%, #0d0500 100%);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (max-width: 680px) { .about-grid { grid-template-columns: 1fr; } }
+
+    .about-text p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: rgba(253,246,227,0.85);
+      margin-bottom: 1.2rem;
+    }
+    .about-text p strong { color: var(--gold-light); font-weight: 600; }
+
+    .temple-emblem {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .gopuram-art {
+      width: 180px;
+      height: 240px;
+      position: relative;
+    }
+    .gopuram-art svg { width: 100%; height: 100%; }
+
+    /* ─── DEITY ─── */
+    #deity {
+      background: radial-gradient(ellipse at center, #1f0a00 0%, #0d0500 70%);
+      text-align: center;
+    }
+    .deity-card {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(145deg, rgba(201,151,43,0.08), rgba(232,98,26,0.05));
+      border: 1px solid rgba(201,151,43,0.25);
+      border-radius: 4px;
+      padding: 2.5rem 2rem;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .deity-icon { font-size: 4rem; margin-bottom: 1rem; }
+    .deity-name {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.5rem;
+      color: var(--gold-light);
+      margin-bottom: 0.25rem;
+    }
+    .deity-name-ml {
+      font-family: 'Noto Serif Malayalam', serif;
+      font-size: 1.1rem;
+      color: var(--saffron);
+      margin-bottom: 1rem;
+    }
+    .deity-desc {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: rgba(253,246,227,0.8);
+    }
+
+    /* ─── FESTIVALS ─── */
+    #festivals {
+      background: linear-gradient(180deg, #0d0500, #150700, #0d0500);
+    }
+    .festival-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .festival-card {
+      background: linear-gradient(135deg, rgba(201,151,43,0.07), rgba(13,5,0,0.4));
+      border: 1px solid rgba(201,151,43,0.2);
+      border-top: 2px solid var(--gold);
+      padding: 1.75rem 1.5rem;
+      border-radius: 2px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .festival-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(201,151,43,0.15);
+    }
+    .festival-card .icon { font-size: 2.2rem; margin-bottom: 0.75rem; }
+    .festival-card h3 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1rem;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+    }
+    .festival-card p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(253,246,227,0.72);
+    }
+    .festival-month {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--saffron);
+      margin-top: 0.75rem;
+    }
+
+    /* ─── TIMINGS ─── */
+    #timings {
+      background: radial-gradient(ellipse at top, #1a0a00, #0d0500 60%);
+    }
+    .timings-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    .timings-table th {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(201,151,43,0.3);
+      text-align: left;
+    }
+    .timings-table td {
+      padding: 0.9rem 1rem;
+      font-size: 1rem;
+      color: rgba(253,246,227,0.82);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .timings-table tr:hover td { background: rgba(201,151,43,0.05); }
+    .timing-name { color: var(--gold-light); font-weight: 600; }
+    .timing-ml { font-family: 'Noto Serif Malayalam', serif; font-size: 0.9rem; color: rgba(253,246,227,0.5); display: block; }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      background: linear-gradient(180deg, #0d0500, #1a0800);
+      text-align: center;
+    }
+    .contact-box {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      background: rgba(201,151,43,0.06);
+      border: 1px solid rgba(201,151,43,0.2);
+      padding: 3rem 3.5rem;
+      border-radius: 4px;
+      max-width: 500px;
+      width: 100%;
+    }
+    .contact-row { display: flex; align-items: flex-start; gap: 1rem; text-align: left; width: 100%; }
+    .contact-icon { font-size: 1.4rem; color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+    .contact-label { font-family: 'Cinzel Decorative', serif; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--saffron); text-transform: uppercase; display: block; margin-bottom: 0.2rem; }
+    .contact-value { font-size: 1rem; color: rgba(253,246,227,0.85); line-height: 1.5; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #080300;
+      border-top: 1px solid rgba(201,151,43,0.2);
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    footer .footer-om { font-size: 1.8rem; color: var(--gold); opacity: 0.5; margin-bottom: 0.5rem; }
+    footer p { font-size: 0.85rem; color: rgba(253,246,227,0.4); letter-spacing: 0.05em; }
+    footer p span { color: var(--gold); opacity: 0.7; }
+
+    /* Decorative horizontal rule */
+    .gold-rule {
+      width: 100%;
+      max-width: 400px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="home">
+  <div class="mandala-bg">
+    <div class="mandala-ring"></div>
+    <div class="mandala-ring"></div>
+    <div class="mandala-ring"></div>
+    <div class="mandala-ring"></div>
+    <div class="mandala-ring"></div>
+  </div>
+
+  <div class="om-symbol">ॐ</div>
+  <h1 class="hero-title">Sree Krishna Temple</h1>
+  <p class="hero-subtitle">Divya Kshetram · Kerala</p>
+  <p class="hero-malayalam">ശ്രീ കൃഷ്ണ ക്ഷേത്രം</p>
+  <div class="hero-divider"></div>
+  <p class="hero-verse">
+    "Sarva-dharman parityajya<br/>
+    mam ekam sharanam vraja"<br/>
+    <span style="font-size:0.85em; color:rgba(253,246,227,0.5);">— Bhagavad Gita 18.66</span>
+  </p>
+
+  <div class="scroll-cue">
+    <span>▾</span>
+    Explore
+  </div>
+</section>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav>
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#deity">Deity</a>
+  <a href="#festivals">Festivals</a>
+  <a href="#timings">Timings</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section id="about">
+  <div class="section-inner">
+    <h2 class="section-heading">About the Temple</h2>
+    <p class="section-ornament">❧ ✦ ❧</p>
+    <div class="gold-rule"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          The <strong>Sree Krishna Temple</strong> is a sacred abode nestled in the heart of Kerala, dedicated to Lord Sri Krishna — the divine charioteer of the Mahabharata and the eternal teacher of the Bhagavad Gita.
+        </p>
+        <p>
+          Built in the traditional <strong>Kerala style of architecture</strong>, the temple features a magnificent <em>Gopuram</em> (tower), intricately carved wooden pillars, and a sanctum sanctorum that glows with the warmth of oil lamps. The fragrance of jasmine and the sound of <em>nadaswaram</em> fill the air during worship.
+        </p>
+        <p>
+          Devotees from across Kerala and beyond come here to seek <strong>blessings, peace, and spiritual solace</strong>. The temple has been a center of cultural and religious life for generations, preserving the rich traditions of Kerala's Hindu heritage.
+        </p>
+      </div>
+      <div class="temple-emblem">
+        <!-- SVG Gopuram Illustration -->
+        <div class="gopuram-art">
+          <svg viewBox="0 0 180 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Base platform -->
+            <rect x="10" y="210" width="160" height="20" fill="#c9972b" opacity="0.3" rx="1"/>
+            <rect x="20" y="200" width="140" height="12" fill="#c9972b" opacity="0.4" rx="1"/>
+            <!-- Main tower tiers -->
+            <rect x="50" y="170" width="80" height="32" fill="none" stroke="#c9972b" stroke-width="1.2" opacity="0.6"/>
+            <rect x="58" y="140" width="64" height="32" fill="none" stroke="#c9972b" stroke-width="1.2" opacity="0.65"/>
+            <rect x="66" y="112" width="48" height="30" fill="none" stroke="#c9972b" stroke-width="1.2" opacity="0.7"/>
+            <rect x="72" y="86" width="36" height="28" fill="none" stroke="#c9972b" stroke-width="1.2" opacity="0.75"/>
+            <rect x="76" y="62" width="28" height="26" fill="none" stroke="#c9972b" stroke-width="1.2" opacity="0.8"/>
+            <rect x="80" y="40" width="20" height="24" fill="none" stroke="#c9972b" stroke-width="1.4" opacity="0.85"/>
+            <!-- Spire -->
+            <polygon points="90,6 80,40 100,40" fill="#c9972b" opacity="0.5"/>
+            <circle cx="90" cy="6" r="4" fill="#f0c050" opacity="0.9"/>
+            <!-- Door arch -->
+            <path d="M72 202 Q90 185 108 202" stroke="#c9972b" stroke-width="1.5" fill="none" opacity="0.7"/>
+            <rect x="78" y="185" width="24" height="17" fill="none" stroke="#c9972b" stroke-width="1" opacity="0.6"/>
+            <!-- Decorative dots -->
+            <circle cx="90" cy="155" r="2" fill="#c9972b" opacity="0.5"/>
+            <circle cx="90" cy="126" r="2" fill="#c9972b" opacity="0.5"/>
+            <circle cx="90" cy="100" r="2" fill="#c9972b" opacity="0.5"/>
+          </svg>
+        </div>
+        <p style="font-family:'Cinzel Decorative',serif; font-size:0.7rem; letter-spacing:0.15em; color:var(--gold); opacity:0.6; text-align:center; text-transform:uppercase;">Kerala Style Gopuram</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ DEITY ═══════════════ -->
+<section id="deity">
+  <div class="section-inner">
+    <h2 class="section-heading">Presiding Deity</h2>
+    <p class="section-ornament">☸ ✦ ☸</p>
+    <div class="gold-rule"></div>
+    <div class="deity-card">
+      <div class="deity-icon">🪈</div>
+      <h3 class="deity-name">Lord Sree Krishna</h3>
+      <p class="deity-name-ml">ശ്രീ കൃഷ്ണ ഭഗവാൻ</p>
+      <div style="width:80px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin: 0 auto 1rem;"></div>
+      <p class="deity-desc">
+        The presiding deity is <strong style="color:var(--gold-light)">Lord Sree Krishna</strong>, the eighth avatar of Lord Vishnu, revered as the Supreme Being in Vaishnavism. He is worshipped here in his <em>Chaturbhuja</em> form — holding the Sudarshana Chakra, Panchajanya conch, Kaumodaki mace, and a lotus — radiating eternal love, wisdom, and protection to all devotees.
+      </p>
+      <div style="margin-top: 1.25rem; padding: 1rem; border: 1px solid rgba(201,151,43,0.2); border-radius:2px; background: rgba(201,151,43,0.04);">
+        <p style="font-style:italic; font-size:1rem; color:rgba(253,246,227,0.7); line-height:1.8;">
+          "Yada yada hi dharmasya, glanir bhavati Bharata<br/>
+          abhyutthanam adharmasya, tadatmanam srijamy aham"
+        </p>
+        <p style="font-size:0.8rem; color:var(--saffron); margin-top:0.5rem;">— Bhagavad Gita 4.7</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FESTIVALS ═══════════════ -->
+<section id="festivals">
+  <div class="section-inner">
+    <h2 class="section-heading">Sacred Festivals</h2>
+    <p class="section-ornament">✦ ✦ ✦</p>
+    <div class="gold-rule"></div>
+    <div class="festival-grid">
+      <div class="festival-card">
+        <div class="icon">🪔</div>
+        <h3>Vishu</h3>
+        <p>The Malayalam New Year, celebrated with Vishukkani — an auspicious arrangement of golden cucumbers, golden cassia flowers, and fruits before the deity at dawn.</p>
+        <span class="festival-month">📅 April · Medam</span>
+      </div>
+      <div class="festival-card">
+        <div class="icon">🪈</div>
+        <h3>Krishnashtami</h3>
+        <p>The birth anniversary of Lord Krishna, celebrated with great devotion through night-long bhajans, Dahi Handi, and elaborate decorations of the sanctum.</p>
+        <span class="festival-month">📅 August · Chingam</span>
+      </div>
+      <div class="festival-card">
+        <div class="icon">🌸</div>
+        <h3>Thrissur Pooram</h3>
+        <p>The grandest temple festival of Kerala featuring decorated elephants, traditional percussion ensembles, and a spectacular fireworks display.</p>
+        <span class="festival-month">📅 April–May · Medam</span>
+      </div>
+      <div class="festival-card">
+        <div class="icon">🎋</div>
+        <h3>Onam</h3>
+        <p>The harvest festival of Kerala, celebrated with floral Pookalam designs, Sadhya feasts, and special pujas offered at the temple for prosperity and wellbeing.</p>
+        <span class="festival-month">📅 August–September · Chingam</span>
+      </div>
+      <div class="festival-card">
+        <div class="icon">🪔</div>
+        <h3>Karthika Deepam</h3>
+        <p>Thousands of oil lamps are lit throughout the temple premises, illuminating the gopuram and surroundings in a magnificent sea of golden light.</p>
+        <span class="festival-month">📅 November · Vrishchikam</span>
+      </div>
+      <div class="festival-card">
+        <div class="icon">🌺</div>
+        <h3>Utsavam (Annual Festival)</h3>
+        <p>The grand 10-day annual festival featuring classical music, Kathakali performances, processions, and special archanas attracting thousands of devotees.</p>
+        <span class="festival-month">📅 February–March · Kumbham</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TIMINGS ═══════════════ -->
+<section id="timings">
+  <div class="section-inner">
+    <h2 class="section-heading">Darshan & Pooja Timings</h2>
+    <p class="section-ornament">☸ ✦ ☸</p>
+    <div class="gold-rule"></div>
+    <table class="timings-table">
+      <thead>
+        <tr>
+          <th>Pooja / Seva</th>
+          <th>Time</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <span class="timing-name">Nirmalyam</span>
+            <span class="timing-ml">നിർമ്മാല്യദർശനം</span>
+          </td>
+          <td>4:30 AM</td>
+          <td>First viewing of the deity</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="timing-name">Thiruvanandal</span>
+            <span class="timing-ml">തിരുവനന്ദൽ</span>
+          </td>
+          <td>5:00 AM</td>
+          <td>Morning abhishekam</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="timing-name">Ethrithu Seeveli</span>
+            <span class="timing-ml">എഴുന്നള്ളിപ്പ്</span>
+          </td>
+          <td>6:00 AM</td>
+          <td>Usha pooja procession</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="timing-name">Pantheeradi Pooja</span>
+            <span class="timing-ml">പന്തീരടി പൂജ</span>
+          </td>
+          <td>12:00 PM</td>
+          <td>Noon offering</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="timing-name">Temple Closes</span>
+            <span class="timing-ml">ക്ഷേത്രം അടക്കൽ</span>
+          </td>
+          <td>12:30 PM</td>
+          <td>Afternoon break</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="timing-name">Evening Opening</span>
+            <span class="timing-ml">വൈകുന്നേരം തുറക്കൽ</span>
+          </td>
+          <td>5:00 PM</td>
+          <td>Evening darshan begins</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="timing-name">Deeparadhana</span>
+            <span class="timing-ml">ദീപാരാധന</span>
+          </td>
+          <td>7:00 PM</td>
+          <td>Lamp offering — most auspicious</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="timing-name">Athazha Pooja</span>
+            <span class="timing-ml">അത്താഴ പൂജ</span>
+          </td>
+          <td>8:00 PM</td>
+          <td>Night offering</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="timing-name">Temple Closes</span>
+            <span class="timing-ml">ക്ഷേത്രം അടക്കൽ</span>
+          </td>
+          <td>8:30 PM</td>
+          <td>Night closure</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:1.5rem; font-size:0.9rem; color:rgba(253,246,227,0.5); text-align:center; font-style:italic;">
+      ✦ Timings may vary on festival days and special occasions. Please confirm with the temple office.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section id="contact">
+  <div class="section-inner">
+    <h2 class="section-heading">Visit & Contact</h2>
+    <p class="section-ornament">❧ ✦ ❧</p>
+    <div class="gold-rule"></div>
+    <div style="display:flex; justify-content:center;">
+      <div class="contact-box">
+        <div class="contact-row">
+          <span class="contact-icon">📍</span>
+          <div>
+            <span class="contact-label">Location</span>
+            <span class="contact-value">Sree Krishna Temple Road,<br/>Alappuzha, Kerala – 688 001</span>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-icon">📞</span>
+          <div>
+            <span class="contact-label">Phone</span>
+            <span class="contact-value">+91 477 123 4567</span>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-icon">✉️</span>
+          <div>
+            <span class="contact-label">Email</span>
+            <span class="contact-value">info@sreekrishnatemple.org</span>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-icon">🕍</span>
+          <div>
+            <span class="contact-label">Governing Body</span>
+            <span class="contact-value">Travancore Devaswom Board<br/>Kerala, India</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-om">ॐ</div>
+  <p>© 2025 Sree Krishna Temple · <span>ശ്രീ കൃഷ്ണ ക്ഷേത്രം</span></p>
+  <p style="margin-top:0.4rem; font-size:0.75rem;">Hare Krishna · Hare Rama · Jai Shri Krishna</p>
+</footer>
+
+</body>
+</html>
