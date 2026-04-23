@@ -186,7 +186,7 @@
     .section-inner { max-width: 1000px; margin: 0 auto; }
 
     .section-heading {
-      font-family: 'Cinzel Decorative', serif;
+      font-family: 'Cinzel', serif;
       font-size: clamp(1.4rem, 4vw, 2.2rem);
       color: var(--gold-light);
       text-align: center;
@@ -363,6 +363,58 @@
     .contact-label { font-family: 'Cinzel Decorative', serif; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--saffron); text-transform: uppercase; display: block; margin-bottom: 0.2rem; }
     .contact-value { font-size: 1rem; color: rgba(253,246,227,0.85); line-height: 1.5; }
 
+    /* ─── GALLERY ─── */
+    #gallery {
+      background: linear-gradient(180deg, #0d0500, #150700, #0d0500);
+    }
+
+    .gallery-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    /* ── The hover-enlarge wrapper ── */
+    .gallery-item {
+      position: relative;
+      flex-shrink: 0;
+      /* reserve space so layout doesn't jump */
+      width: 220px;
+      height: auto;
+    }
+
+    .gallery-item img {
+      width: 220px;
+      height: auto;
+      border-radius: 4px;
+      display: block;
+      cursor: zoom-in;
+
+      /* smooth scale + glow on hover */
+      transition:
+        transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.45s ease,
+        filter 0.45s ease;
+
+      box-shadow: 0 0 20px rgba(201,151,43,0.35);
+      filter: brightness(0.92) saturate(0.9);
+
+      /* keep enlarged image on top of siblings */
+      position: relative;
+      z-index: 1;
+    }
+
+    .gallery-item img:hover {
+      transform: scale(1.55);
+      box-shadow:
+        0 0 40px rgba(201,151,43,0.65),
+        0 20px 60px rgba(0,0,0,0.7);
+      filter: brightness(1.08) saturate(1.15);
+      z-index: 10;
+    }
+
     /* ─── FOOTER ─── */
     footer {
       background: #080300;
@@ -397,7 +449,14 @@
   </div>
 
   <div class="om-symbol">🪔🪔🪷🪔🪔</div>
-  <img src="Krishan01.jpg" style="width:120px; height:auto; border-radius:4px; box-shadow: 0 0 20px rgba(201,151,43,0.5); animation: fadeIn 2s ease both;"/>
+  <img src="Krishan01.jpg" id="thumbnail" style="width:120px; cursor:zoom-in;" onclick="openOverlay(this)">
+
+  <!-- Overlay / Lightbox -->
+  <div id="overlay" onclick="closeOverlay()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:999; justify-content:center; align-items:center; cursor:zoom-out;">
+    <img id="overlay-img" src="" alt="" style="max-width:90%; max-height:90%; border-radius:4px;">
+    <button onclick="closeOverlay()" style="position:fixed; top:1.25rem; right:1.5rem; background:none; border:none; color:white; font-size:2rem; cursor:pointer; opacity:0.8; line-height:1;">&times;</button>
+  </div>
+
   <h1 class="hero-title" style="font-size:1.8rem; margin-top:0.25rem; color:rgba(253,246,227,0.6); font-weight:400;">Krishnapuram Brahamana Samudayam</h1>
   <h2 class="hero-title" style="font-size:1.2rem; margin-top:0.5rem; color:rgba(253,246,227,0.6); font-weight:400;">Trivandrum District, Kerala State</h2>
   <p class="hero-malayalam">ശ്രീ കൃഷ്ണ ക്ഷേത്രം</p>
@@ -407,13 +466,30 @@
     mam ekam sharanam vraja"<br/>
     <span style="font-size:0.85em; color:rgba(253,246,227,0.5);">— Bhagavad Gita 18.66</span>
   </p>
-  
 
   <div class="scroll-cue">
     <span>▾</span>
     Explore
   </div>
 </section>
+
+<script>
+  function openOverlay(img) {
+    const ov = document.getElementById('overlay');
+    document.getElementById('overlay-img').src = img.src;
+    ov.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeOverlay() {
+    document.getElementById('overlay').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeOverlay();
+  });
+</script>
 
 <!-- ═══════════════ NAV ═══════════════ -->
 <nav>
@@ -446,32 +522,25 @@ environment surrounded with vedic mantras.
         </p>
       </div>
       <div class="temple-emblem">
-        <!-- SVG Gopuram Illustration -->
         <div class="gopuram-art">
           <svg viewBox="0 0 180 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Base platform -->
             <rect x="10" y="210" width="160" height="20" fill="#c9972b" opacity="0.3" rx="1"/>
             <rect x="20" y="200" width="140" height="12" fill="#c9972b" opacity="0.4" rx="1"/>
-            <!-- Main tower tiers -->
             <rect x="50" y="170" width="80" height="32" fill="none" stroke="#c9972b" stroke-width="1.2" opacity="0.6"/>
             <rect x="58" y="140" width="64" height="32" fill="none" stroke="#c9972b" stroke-width="1.2" opacity="0.65"/>
             <rect x="66" y="112" width="48" height="30" fill="none" stroke="#c9972b" stroke-width="1.2" opacity="0.7"/>
             <rect x="72" y="86" width="36" height="28" fill="none" stroke="#c9972b" stroke-width="1.2" opacity="0.75"/>
             <rect x="76" y="62" width="28" height="26" fill="none" stroke="#c9972b" stroke-width="1.2" opacity="0.8"/>
             <rect x="80" y="40" width="20" height="24" fill="none" stroke="#c9972b" stroke-width="1.4" opacity="0.85"/>
-            <!-- Spire -->
             <polygon points="90,6 80,40 100,40" fill="#c9972b" opacity="0.5"/>
             <circle cx="90" cy="6" r="4" fill="#f0c050" opacity="0.9"/>
-            <!-- Door arch -->
             <path d="M72 202 Q90 185 108 202" stroke="#c9972b" stroke-width="1.5" fill="none" opacity="0.7"/>
             <rect x="78" y="185" width="24" height="17" fill="none" stroke="#c9972b" stroke-width="1" opacity="0.6"/>
-            <!-- Decorative dots -->
             <circle cx="90" cy="155" r="2" fill="#c9972b" opacity="0.5"/>
             <circle cx="90" cy="126" r="2" fill="#c9972b" opacity="0.5"/>
             <circle cx="90" cy="100" r="2" fill="#c9972b" opacity="0.5"/>
           </svg>
         </div>
-        <p style="font-family:'Cinzel Decorative',serif; font-size:0.7rem; letter-spacing:0.15em; color:var(--gold); opacity:0.6; text-align:center; text-transform:uppercase;">Kerala Style Gopuram</p>
       </div>
     </div>
   </div>
@@ -484,7 +553,6 @@ environment surrounded with vedic mantras.
     <p class="section-ornament">☸ ✦ ☸</p>
     <div class="gold-rule"></div>
 
-    <!-- Krishna card -->
     <div class="deity-card" style="margin-bottom: 2.5rem;">
       <div class="deity-icon">🪈</div>
       <h3 class="deity-name">Lord Sree Krishna</h3>
@@ -502,7 +570,6 @@ environment surrounded with vedic mantras.
       </div>
     </div>
 
-    <!-- Ganapathy card -->
     <div class="deity-card" style="margin-bottom: 0;">
       <div class="deity-icon">🕉</div>
       <h3 class="deity-name">Lord Ganapathy</h3>
@@ -549,34 +616,22 @@ environment surrounded with vedic mantras.
         </p>
       </div>
       <div class="temple-emblem">
-        <!-- SVG Naga / Kavu illustration -->
         <svg viewBox="0 0 180 240" fill="none" xmlns="http://www.w3.org/2000/svg" width="180" height="240">
-          <!-- Ground / roots -->
           <ellipse cx="90" cy="225" rx="70" ry="10" fill="#1a3300" opacity="0.5"/>
-          <!-- Tree trunk -->
           <rect x="82" y="130" width="16" height="95" rx="6" fill="#3d2200" opacity="0.7"/>
-          <!-- Tree canopy -->
           <ellipse cx="90" cy="100" rx="55" ry="60" fill="#1a3300" opacity="0.35"/>
           <ellipse cx="60" cy="115" rx="30" ry="35" fill="#1a3300" opacity="0.3"/>
           <ellipse cx="120" cy="110" rx="32" ry="38" fill="#1a3300" opacity="0.3"/>
-          <!-- Naga stone base -->
-          <rect x="60" y="155" width="60" height="30" rx="3" fill="#c9972b" opacity="0.15" stroke="#c9972b" stroke-width="0.8" opacity="0.4"/>
-          <!-- Coiled snake body -->
+          <rect x="60" y="155" width="60" height="30" rx="3" fill="#c9972b" opacity="0.15" stroke="#c9972b" stroke-width="0.8"/>
           <path d="M90 145 C70 145 55 158 60 168 C65 178 80 175 85 165 C90 155 105 148 115 155 C125 162 120 178 108 180 C96 182 88 175 90 165" stroke="#8aad3a" stroke-width="3" fill="none" opacity="0.75" stroke-linecap="round"/>
-          <!-- Snake hood -->
           <ellipse cx="90" cy="138" rx="14" ry="9" fill="none" stroke="#8aad3a" stroke-width="1.8" opacity="0.7"/>
           <ellipse cx="90" cy="136" rx="8" ry="5" fill="#8aad3a" opacity="0.25"/>
-          <!-- Snake head -->
           <ellipse cx="90" cy="130" rx="5" ry="6" fill="#8aad3a" opacity="0.7"/>
-          <!-- Eyes -->
           <circle cx="87.5" cy="128.5" r="1" fill="#f0c050" opacity="0.9"/>
           <circle cx="92.5" cy="128.5" r="1" fill="#f0c050" opacity="0.9"/>
-          <!-- Tongue -->
           <path d="M90 136 L88 139 M90 136 L92 139" stroke="#e8621a" stroke-width="0.8" opacity="0.8"/>
-          <!-- Sacred lamps at base -->
           <circle cx="68" cy="153" r="3" fill="#f0c050" opacity="0.6"/>
           <circle cx="112" cy="153" r="3" fill="#f0c050" opacity="0.6"/>
-          <!-- River ripples at bottom -->
           <path d="M15 232 Q35 228 55 232 Q75 236 95 232 Q115 228 135 232 Q155 236 165 232" stroke="#4a8fa8" stroke-width="1.2" fill="none" opacity="0.5"/>
           <path d="M20 238 Q45 234 70 238 Q95 242 120 238 Q145 234 160 238" stroke="#4a8fa8" stroke-width="0.8" fill="none" opacity="0.35"/>
         </svg>
@@ -584,7 +639,6 @@ environment surrounded with vedic mantras.
       </div>
     </div>
 
-    <!-- Naga worship highlights -->
     <div class="festival-grid" style="margin-top:2.5rem;">
       <div class="festival-card">
         <div class="icon">🐍</div>
@@ -609,31 +663,37 @@ environment surrounded with vedic mantras.
     <div class="gold-rule"></div>
     <div class="festival-grid">
       <div class="festival-card">
-        <div class="icon">🪔</div>
+        <div class="icon">🪔🪷🪔</div>
         <h3>Vishu</h3>
         <p>The Malayalam New Year, celebrated with Vishukkani — an auspicious arrangement of golden cucumbers, golden cassia flowers, and fruits before the deity at dawn.</p>
         <span class="festival-month">📅 April · Medam</span>
       </div>
       <div class="festival-card">
-        <div class="icon">🪈</div>
-        <h3>Krishnashtami</h3>
-        <p>The birth anniversary of Lord Krishna, celebrated with great devotion through night-long bhajans, Dahi Handi, and elaborate decorations of the sanctum.</p>
-        <span class="festival-month">📅 August · Chingam</span>
-      </div>
-      <div class="festival-card">
-        <div class="icon">🌸</div>
+        <div class="icon">🪔🪷🪔</div>
         <h3>Prathishta Varshikam</h3>
         <p>Day temple prathishta done</p>
         <span class="festival-month">📅 May–June · Idavam</span>
       </div>
       <div class="festival-card">
-        <div class="icon">🪔</div>
-        <h3>Vaikunda Ekadasi</h3>
-        <p>Thousands of oil lamps are lit throughout the temple premises, illuminating the gopuram and surroundings in a magnificent sea of golden light.</p>
-        <span class="festival-month">📅 November–December–Januray· Vrishchikam</span>
+        <div class="icon">🪔🪷🪔</div>
+        <h3>Krishnashtami</h3>
+        <p>The birth anniversary of Lord Krishna, celebrated with great devotion through night-long bhajans, Dahi Handi, and elaborate decorations of the sanctum.</p>
+        <span class="festival-month">📅 August · Chingam</span>
       </div>
       <div class="festival-card">
-        <div class="icon">🌺</div>
+        <div class="icon">🪔🪷🪔</div>
+        <h3>Vinayaka Chathruthi</h3>
+        <p>The birth anniversary of Lord Ganesha, celebrated with great devotion through night-long bhajans, Dahi Handi, and elaborate decorations of the sanctum.</p>
+        <span class="festival-month">📅 September · Chingam</span>
+      </div>
+      <div class="festival-card">
+        <div class="icon">🪔🪷🪔</div>
+        <h3>Vaikunda Ekadasi</h3>
+        <p>Thousands of oil lamps are lit throughout the temple premises, illuminating the gopuram and surroundings in a magnificent sea of golden light.</p>
+        <span class="festival-month">📅 November–December–January · Vrishchikam</span>
+      </div>
+      <div class="festival-card">
+        <div class="icon">🪔🪷🪔</div>
         <h3>Mandala Pooja</h3>
         <p>The grand 41-day annual festival featuring special archanas attracting thousands of devotees.</p>
         <span class="festival-month">📅 November–December · Kumbham</span>
@@ -721,7 +781,6 @@ environment surrounded with vedic mantras.
   </div>
 </section>
 
-
 <!-- ═══════════════ CONTACT ═══════════════ -->
 <section id="contact">
   <div class="section-inner">
@@ -733,49 +792,119 @@ environment surrounded with vedic mantras.
         <div class="contact-row">
           <span class="contact-icon">📍</span>
           <div>
-            <span class="contact-label">Location</span>
-            <span class="contact-value">Sree Krishna Temple ,<br/>Krishnapuram Gramamam,Neyyattinkara, Kerala – 695 121</span>
+            <span class="contact-label">Address</span>
+            <span class="contact-value">President,Krishnapuram Brahmana Samudayam, Neyyattinkara, Trivandrum <br/>Kerala - 695121</span>
           </div>
         </div>
         <div class="contact-row">
-          <span class="contact-icon">📞</span>
-          <div>
-            <span class="contact-label">Phone</span>
-            <span class="contact-value">+91 TBC</span>
-          </div>
         </div>
         <div class="contact-row">
           <span class="contact-icon">✉️</span>
           <div>
             <span class="contact-label">Email</span>
-            <span class="contact-value">kpbs.nta@gmail.com</span>
+            <a href="mailto:kpbs.nta@gmail.com" style="color:inherit;">kpbs.nta@gmail.com</a>
           </div>
         </div>
         <div class="contact-row">
           <span class="contact-icon">🕍</span>
           <div>
             <span class="contact-label">Governing Body</span>
-            <span class="contact-value">Krishnapuram Brahmana Samudayam, Neyyattinkara, Trivandrum,India<br/>Kerala - 695121</span>
+            <span class="contact-value">Krishnapuram Brahmana Samudayam, Neyyattinkara, Trivandrum, India<br/>Kerala - 695121</span>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Embedded Map -->
+    <div style="margin-top: 2.5rem; padding: 0 1rem;">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3947.082768860548!2d77.0901725754405!3d8.393520191644589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05ae85a0b11b3b%3A0xb2e2bcd8fec7a99!2sKrishnapuram%20Gramam%20Bhramana%20Samudayam!5e0!3m2!1sen!2sin!4v1776927526855!5m2!1sen!2sin"
+        width="100%"
+        height="350"
+        style="border: 1px solid rgba(212,175,55,0.3); border-radius: 8px; opacity: 0.9; display: block;"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+  </div>
+</section>
+ 
+<!-- ═══════════════ GALLERY ═══════════════ -->
+<!-- Updated gallery section -->
+<section id="gallery">
+  <div class="section-inner">
+    <h2 class="section-heading">Gallery</h2>
+    <p class="section-ornament">❧ ✦ ❧</p>
+    <div class="gold-rule"></div>
+
+    <div class="gallery-grid" style="overflow: visible; padding: 3rem 1rem;">
+      <div class="gallery-item">
+        <img src="IMG_1745.jpeg" alt="Temple Image 1" onclick="openLightbox(this)" style="cursor: zoom-in;"/>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_1747.jpeg" alt="Temple Image 2" onclick="openLightbox(this)" style="cursor: zoom-in;"/>
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_1739.jpeg" alt="Temple Image 3" onclick="openLightbox(this)" style="cursor: zoom-in;"/>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- ═══════════════ GALLERY ═══════════════ -->
-<section id="gallery">
-  <div class="section-inner">
-    <h2 class="section-heading">GALLERY</h2>
-    <p class="section-ornament">❧ ✦ ❧</p>
-    <div class="gold-rule"></div>
-    <div style="display:flex; justify-content:center;">
-      <img src="IMG_1745.jpeg" style="width:220px; height:auto; border-radius:4px; box-shadow: 0 0 20px rgba(201,151,43,0.5); animation: fadeIn 2s ease both; margin:0 1rem;"/>
-      <img src="IMG_1747.jpeg" style="width:220px; height:auto; border-radius:4px; box-shadow: 0 0 20px rgba(201,151,43,0.5); animation: fadeIn 2s ease both; margin:0 1rem;"/>
-      <img src="IMG_1739.jpeg" style="width:220px; height:auto; border-radius:4px; box-shadow: 0 0 20px rgba(201,151,43,0.5); animation: fadeIn 2s ease both; margin:0 1rem;"/>
-    </div>
-  </div>
-</section>
+<!-- Lightbox overlay -->
+<div id="lightbox" onclick="closeLightbox()" style="
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+">
+  <img id="lightbox-img" src="" alt="" style="
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  "/>
+  <button onclick="closeLightbox()" style="
+    position: fixed;
+    top: 1.25rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.8;
+  ">&times;</button>
+</div>
+
+<script>
+  function openLightbox(img) {
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    lbImg.src = img.src;
+    lbImg.alt = img.alt;
+    lb.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
 
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
