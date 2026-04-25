@@ -972,7 +972,7 @@ environment surrounded with vedic mantras.
   function changeImage(direction) {
     currentIndex += direction;
     if (currentIndex < 0) currentIndex = galleryImages.length - 1;
-    if (currentIndex >= galleryImages.length) currentIndex = 0;
+    if (currentIndex >= galleryImages.length) currentIndex = galleryImages.length - 1;
     updateLightboxImage();
   }
 
@@ -983,6 +983,24 @@ environment surrounded with vedic mantras.
     lbImg.src = img.src;
     lbImg.alt = img.alt;
     counter.textContent = (currentIndex + 1) + ' / ' + galleryImages.length;
+    function updateLightboxImage() {
+    const img = galleryImages[currentIndex];
+    const lbImg = document.getElementById('lightbox-img');
+    const counter = document.getElementById('lightbox-counter');
+    lbImg.src = img.src;
+    lbImg.alt = img.alt;
+    counter.textContent = (currentIndex + 1) + ' / ' + galleryImages.length;
+
+  // Disable prev button on first image
+  const prevBtn = document.querySelector('#lightbox button:nth-child(1)');
+  const nextBtn = document.querySelector('#lightbox button:nth-child(3)');
+
+  prevBtn.style.opacity = currentIndex === 0 ? '0.2' : '1';
+  prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
+
+  nextBtn.style.opacity = currentIndex === galleryImages.length - 1 ? '0.2' : '1';
+  nextBtn.style.pointerEvents = currentIndex === galleryImages.length - 1 ? 'none' : 'auto';
+}
   }
 
   function closeLightbox() {
