@@ -832,7 +832,6 @@ environment surrounded with vedic mantras.
 </section>
  
 <!-- ═══════════════ GALLERY ═══════════════ -->
-<!-- Updated gallery section -->
 <section id="gallery">
   <div class="section-inner">
     <h2 class="section-heading">Gallery</h2>
@@ -865,6 +864,30 @@ environment surrounded with vedic mantras.
   justify-content: center;
   cursor: zoom-out;
 ">
+
+  <!-- Prev Button -->
+  <button onclick="event.stopPropagation(); changeImage(-1)" style="
+    position: fixed;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    font-size: 2.5rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: background 0.2s;
+  " onmouseover="this.style.background='rgba(255,255,255,0.25)'"
+     onmouseout="this.style.background='rgba(255,255,255,0.1)'">&#8249;</button>
+
+  <!-- Image -->
   <img id="lightbox-img" src="" alt="" style="
     max-width: 90vw;
     max-height: 90vh;
@@ -872,28 +895,94 @@ environment surrounded with vedic mantras.
     border-radius: 4px;
     box-shadow: 0 8px 40px rgba(0,0,0,0.6);
   "/>
-  <button onclick="closeLightbox()" style="
+
+  <!-- Next Button -->
+  <button onclick="event.stopPropagation(); changeImage(1)" style="
+    position: fixed;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    font-size: 2.5rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: background 0.2s;
+  " onmouseover="this.style.background='rgba(255,255,255,0.25)'"
+     onmouseout="this.style.background='rgba(255,255,255,0.1)'">&#8250;</button>
+
+  <!-- Close Button -->
+  <button onclick="event.stopPropagation(); closeLightbox()" style="
     position: fixed;
     top: 1.25rem;
     right: 1.5rem;
-    background: none;
-    border: none;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
     color: white;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     line-height: 1;
-    opacity: 0.8;
   ">&times;</button>
+
+  <!-- Image Counter -->
+  <div id="lightbox-counter" style="
+    position: fixed;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.7);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+  "></div>
+
 </div>
 
 <script>
+  let currentIndex = 0;
+  let galleryImages = [];
+
+  // Collect all gallery images after DOM is ready
+  document.addEventListener('DOMContentLoaded', function () {
+    galleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
+  });
+
   function openLightbox(img) {
+    galleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
+    currentIndex = galleryImages.indexOf(img);
+
     const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lightbox-img');
-    lbImg.src = img.src;
-    lbImg.alt = img.alt;
+    updateLightboxImage();
     lb.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+  }
+
+  function changeImage(direction) {
+    currentIndex += direction;
+    if (currentIndex < 0) currentIndex = galleryImages.length - 1;
+    if (currentIndex >= galleryImages.length) currentIndex = 0;
+    updateLightboxImage();
+  }
+
+  function updateLightboxImage() {
+    const img = galleryImages[currentIndex];
+    const lbImg = document.getElementById('lightbox-img');
+    const counter = document.getElementById('lightbox-counter');
+    lbImg.src = img.src;
+    lbImg.alt = img.alt;
+    counter.textContent = (currentIndex + 1) + ' / ' + galleryImages.length;
   }
 
   function closeLightbox() {
@@ -901,8 +990,11 @@ environment surrounded with vedic mantras.
     document.body.style.overflow = '';
   }
 
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeLightbox();
+  document.addEventListener('keydown', function (e) {
+    if (document.getElementById('lightbox').style.display !== 'flex') return;
+    if (e.key === 'Escape')      closeLightbox();
+    if (e.key === 'ArrowRight')  changeImage(1);
+    if (e.key === 'ArrowLeft')   changeImage(-1);
   });
 </script>
 
