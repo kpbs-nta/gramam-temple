@@ -866,7 +866,7 @@ environment surrounded with vedic mantras.
 ">
 
   <!-- Prev Button -->
-  <button onclick="event.stopPropagation(); changeImage(-1)" style="
+  <button id="prev-btn" onclick="event.stopPropagation(); changeImage(-1)" style="
     position: fixed;
     left: 1.25rem;
     top: 50%;
@@ -883,7 +883,7 @@ environment surrounded with vedic mantras.
     align-items: center;
     justify-content: center;
     line-height: 1;
-    transition: background 0.2s;
+    transition: background 0.2s, opacity 0.2s;
   " onmouseover="this.style.background='rgba(255,255,255,0.25)'"
      onmouseout="this.style.background='rgba(255,255,255,0.1)'">&#8249;</button>
 
@@ -897,7 +897,7 @@ environment surrounded with vedic mantras.
   "/>
 
   <!-- Next Button -->
-  <button onclick="event.stopPropagation(); changeImage(1)" style="
+  <button id="next-btn" onclick="event.stopPropagation(); changeImage(1)" style="
     position: fixed;
     right: 1.25rem;
     top: 50%;
@@ -914,7 +914,7 @@ environment surrounded with vedic mantras.
     align-items: center;
     justify-content: center;
     line-height: 1;
-    transition: background 0.2s;
+    transition: background 0.2s, opacity 0.2s;
   " onmouseover="this.style.background='rgba(255,255,255,0.25)'"
      onmouseout="this.style.background='rgba(255,255,255,0.1)'">&#8250;</button>
 
@@ -954,7 +954,6 @@ environment surrounded with vedic mantras.
   let currentIndex = 0;
   let galleryImages = [];
 
-  // Collect all gallery images after DOM is ready
   document.addEventListener('DOMContentLoaded', function () {
     galleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
   });
@@ -962,45 +961,38 @@ environment surrounded with vedic mantras.
   function openLightbox(img) {
     galleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
     currentIndex = galleryImages.indexOf(img);
-
-    const lb = document.getElementById('lightbox');
-    updateLightboxImage();
-    lb.style.display = 'flex';
+    document.getElementById('lightbox').style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    updateLightboxImage();
   }
 
   function changeImage(direction) {
     currentIndex += direction;
-    if (currentIndex < 0) currentIndex = galleryImages.length - 1;
+    // Stop at boundaries — no looping
+    if (currentIndex < 0) currentIndex = 0;
     if (currentIndex >= galleryImages.length) currentIndex = galleryImages.length - 1;
     updateLightboxImage();
   }
 
   function updateLightboxImage() {
     const img = galleryImages[currentIndex];
-    const lbImg = document.getElementById('lightbox-img');
-    const counter = document.getElementById('lightbox-counter');
-    lbImg.src = img.src;
-    lbImg.alt = img.alt;
-    counter.textContent = (currentIndex + 1) + ' / ' + galleryImages.length;
-    function updateLightboxImage() {
-    const img = galleryImages[currentIndex];
-    const lbImg = document.getElementById('lightbox-img');
-    const counter = document.getElementById('lightbox-counter');
-    lbImg.src = img.src;
-    lbImg.alt = img.alt;
-    counter.textContent = (currentIndex + 1) + ' / ' + galleryImages.length;
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox-img').alt = img.alt;
+    document.getElementById('lightbox-counter').textContent =
+      (currentIndex + 1) + ' / ' + galleryImages.length;
 
-  // Disable prev button on first image
-  const prevBtn = document.querySelector('#lightbox button:nth-child(1)');
-  const nextBtn = document.querySelector('#lightbox button:nth-child(3)');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
 
-  prevBtn.style.opacity = currentIndex === 0 ? '0.2' : '1';
-  prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
+    // Fade + disable at first image
+    prevBtn.style.opacity      = currentIndex === 0 ? '0.2' : '1';
+    prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
+    prevBtn.style.cursor        = currentIndex === 0 ? 'default' : 'pointer';
 
-  nextBtn.style.opacity = currentIndex === galleryImages.length - 1 ? '0.2' : '1';
-  nextBtn.style.pointerEvents = currentIndex === galleryImages.length - 1 ? 'none' : 'auto';
-}
+    // Fade + disable at last image
+    nextBtn.style.opacity      = currentIndex === galleryImages.length - 1 ? '0.2' : '1';
+    nextBtn.style.pointerEvents = currentIndex === galleryImages.length - 1 ? 'none' : 'auto';
+    nextBtn.style.cursor        = currentIndex === galleryImages.length - 1 ? 'default' : 'pointer';
   }
 
   function closeLightbox() {
@@ -1010,9 +1002,9 @@ environment surrounded with vedic mantras.
 
   document.addEventListener('keydown', function (e) {
     if (document.getElementById('lightbox').style.display !== 'flex') return;
-    if (e.key === 'Escape')      closeLightbox();
-    if (e.key === 'ArrowRight')  changeImage(1);
-    if (e.key === 'ArrowLeft')   changeImage(-1);
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowRight') changeImage(1);
+    if (e.key === 'ArrowLeft')  changeImage(-1);
   });
 </script>
 
