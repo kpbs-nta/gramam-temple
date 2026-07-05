@@ -1,898 +1,624 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="google-site-verification" content="191gLCdgCQcNaMJZF7VaB77f4L1HngX5hYnFxXaa_ko" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sree Krishna Temple — Neyyattinkara</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&family=Noto+Serif+Malayalam:wght@400;500&display=swap" rel="stylesheet"/>
+  <title>Sree Krishna Temple</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cinzel+Decorative:wght@400;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+Malayalam:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --river-deep:   #1a3a3a;
-      --river-mid:    #2d5c54;
-      --river-light:  #4a8c7c;
-      --river-pale:   #a8cfc4;
-      --shore:        #e8dcc8;
-      --sand:         #f4ede0;
-      --gold:         #c9972b;
-      --gold-light:   #e8b84b;
-      --gold-pale:    #fdf0d0;
-      --saffron:      #d4621a;
-      --cream:        #faf6ee;
-      --text-dark:    #1e1a14;
-      --text-mid:     #4a3e2e;
-      --text-muted:   #8a7a60;
-      --border:       rgba(180,140,70,0.2);
-      --border-strong: rgba(180,140,70,0.45);
+      --gold: #ab7a2e;
+      --gold-deep: #8a5a1a;
+      --gold-light: #c9972b;
+      --gold-pale: #f6e4b8;
+      --maroon: #7a231c;
+      --maroon-deep: #5e1a15;
+      --vermilion: #b83a24;
+      --saffron: #c15a1a;
+      --ink: #3a2412;
+      --ink-soft: rgba(58,36,18,0.72);
+      --ink-faint: rgba(58,36,18,0.5);
+      --cream: #f7ecd3;
+      --cream-2: #efe0ba;
+      --paper: #fffaf0;
     }
 
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
     body {
       background: var(--cream);
-      color: var(--text-dark);
-      font-family: 'Jost', sans-serif;
-      font-weight: 300;
+      color: var(--ink);
+      font-family: 'Crimson Pro', Georgia, serif;
       overflow-x: hidden;
     }
 
-    /* ── HERO ── */
+    /* ─── HERO ─── */
     .hero {
-      min-height: 100vh;
       position: relative;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
       overflow: hidden;
-      background: var(--river-deep);
+      background: radial-gradient(ellipse at 50% 20%, #fffaf0 0%, #f7ecd3 45%, #eeddb8 100%);
     }
 
-    /* Layered water background */
-    .hero-water {
+    .hero-lotus {
       position: absolute;
       inset: 0;
-      pointer-events: none;
-    }
-    .water-layer {
-      position: absolute;
-      left: 0; right: 0;
-      height: 100%;
-    }
-    /* Sky gradient */
-    .water-layer.sky {
-      background: linear-gradient(180deg,
-        #0d2a28 0%,
-        #1a4040 25%,
-        #2d6860 45%,
-        #3d8878 55%,
-        #2d6860 65%,
-        #1a4040 80%,
-        #0d2a28 100%
-      );
-    }
-    /* Ripple lines */
-    .ripple {
-      position: absolute;
-      left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent 5%, rgba(168,207,196,0.12) 30%, rgba(168,207,196,0.22) 50%, rgba(168,207,196,0.12) 70%, transparent 95%);
-    }
-
-    /* Tree silhouettes */
-    .trees {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 220px;
-      pointer-events: none;
-    }
-
-    /* Floating petals */
-    .petal {
-      position: absolute;
-      width: 6px;
-      height: 9px;
-      border-radius: 80% 20% 80% 20%;
-      opacity: 0;
-      animation: floatDown linear infinite;
-    }
-    @keyframes floatDown {
-      0%   { opacity:0; transform: translateY(-20px) rotate(0deg); }
-      10%  { opacity: 0.6; }
-      90%  { opacity: 0.3; }
-      100% { opacity:0; transform: translateY(100vh) rotate(360deg); }
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 10;
-      padding: 2rem;
-      max-width: 680px;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      font-family: 'Jost', sans-serif;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--river-pale);
-      border: 1px solid rgba(168,207,196,0.3);
-      padding: 0.4rem 1.2rem;
-      border-radius: 2px;
-      margin-bottom: 1.6rem;
-      opacity: 0;
-      animation: fadeUp 1s 0.3s ease both;
-    }
-
-    .hero-ml {
-      font-family: 'Noto Serif Malayalam', serif;
-      font-size: 1.1rem;
-      color: rgba(168,207,196,0.65);
-      margin-bottom: 0.5rem;
-      opacity: 0;
-      animation: fadeUp 1s 0.5s ease both;
-    }
-
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 8vw, 5.5rem);
-      font-weight: 300;
-      color: #f0e8d4;
-      line-height: 1.05;
-      letter-spacing: 0.02em;
-      margin-bottom: 0.3rem;
-      opacity: 0;
-      animation: fadeUp 1s 0.7s ease both;
-    }
-
-    .hero-sub {
-      font-size: 0.8rem;
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(168,207,196,0.55);
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 1s 0.9s ease both;
-    }
-
-    .hero-divider {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.75rem;
-      margin-bottom: 1.8rem;
-      opacity: 0;
-      animation: fadeUp 1s 1.1s ease both;
+      pointer-events: none;
     }
-    .hero-divider-line {
-      width: 60px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,151,43,0.5));
+    .hero-lotus svg {
+      width: min(900px, 130vw);
+      height: auto;
+      animation: lotusBreathe 8s ease-in-out infinite;
+      transform-origin: center;
     }
-    .hero-divider-line.r { background: linear-gradient(270deg, transparent, rgba(201,151,43,0.5)); }
-    .hero-divider-dot {
-      width: 5px; height: 5px;
-      border: 1px solid rgba(201,151,43,0.5);
-      border-radius: 50%;
+    @keyframes lotusBreathe {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50%      { transform: scale(1.035); opacity: 1; }
     }
 
-    .hero-verse {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.05rem;
-      font-style: italic;
-      font-weight: 300;
-      color: rgba(240,232,212,0.55);
-      line-height: 2;
-      opacity: 0;
-      animation: fadeUp 1s 1.3s ease both;
+    .om-symbol {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      line-height: 1;
+      filter: drop-shadow(0 4px 14px rgba(168,117,42,0.25));
     }
-    .hero-verse cite {
-      display: block;
-      font-size: 0.75rem;
-      font-style: normal;
-      font-family: 'Jost', sans-serif;
-      letter-spacing: 0.12em;
-      color: rgba(168,207,196,0.4);
+
+    .hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      font-weight: 700;
+      color: var(--gold-deep);
+      text-shadow: 0 2px 2px rgba(255,255,255,0.6);
+      letter-spacing: 0.05em;
+      line-height: 1.2;
+      animation: fadeUp 1.2s ease both;
+    }
+    .hero-subtitle {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(0.9rem, 2.5vw, 1.4rem);
+      color: var(--saffron);
+      letter-spacing: 0.3em;
       margin-top: 0.5rem;
+      text-transform: uppercase;
+      animation: fadeUp 1.4s ease both;
+    }
+    .hero-malayalam {
+      font-family: 'Noto Serif Malayalam', serif;
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      color: var(--ink-soft);
+      margin-top: 1rem;
+      animation: fadeUp 1.6s ease both;
+    }
+    .hero-divider {
+      width: 200px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--vermilion) 50%, var(--gold) 70%, transparent);
+      margin: 1.5rem auto;
+      animation: fadeUp 1.6s ease both;
+    }
+    .hero-verse {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-style: italic;
+      color: var(--ink-soft);
+      max-width: 500px;
+      line-height: 1.8;
+      animation: fadeUp 1.8s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    .hero-scroll {
+    .scroll-cue {
       position: absolute;
-      bottom: 2.5rem;
+      bottom: 2rem;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
-      opacity: 0;
-      animation: fadeIn 2s 2s ease both;
-    }
-    .hero-scroll span {
-      font-size: 9px;
-      letter-spacing: 0.25em;
+      color: var(--gold);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(168,207,196,0.4);
+      animation: fadeIn 3s ease both;
     }
-    .scroll-line {
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(180deg, rgba(168,207,196,0.4), transparent);
-      animation: scrollPulse 2s ease-in-out infinite;
+    .scroll-cue span { animation: bounce 2s ease infinite; display: block; }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
     }
-    @keyframes scrollPulse {
-      0%,100% { transform: scaleY(1); opacity: 0.4; }
-      50% { transform: scaleY(0.7); opacity: 0.8; }
-    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    @keyframes fadeUp {
-      from { opacity:0; transform:translateY(20px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity:0; } to { opacity:1; }
-    }
-
-    /* ── NAV ── */
+    /* ─── NAV ─── */
     nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(26,58,58,0.97);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(168,207,196,0.12);
+      background: rgba(251,246,233,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(168,117,42,0.3);
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      padding: 0.4rem 1rem;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    nav a:hover, nav a.active {
+      color: var(--gold-deep);
+      border-color: rgba(168,117,42,0.4);
+      background: rgba(168,117,42,0.1);
+    }
+
+    /* ─── SCROLL FADE-IN ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 5rem 1.5rem; }
+    .section-inner { max-width: 1000px; margin: 0 auto; }
+
+    .section-heading {
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      color: var(--maroon-deep);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .section-ornament {
+      text-align: center;
+      color: var(--vermilion);
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.85;
+      letter-spacing: 1rem;
+    }
+
+    /* ─── ABOUT ─── */
+    #about {
+      background: linear-gradient(180deg, var(--cream) 0%, var(--cream-2) 50%, var(--cream) 100%);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (max-width: 680px) { .about-grid { grid-template-columns: 1fr; } }
+
+    .about-text p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: var(--ink-soft);
+      margin-bottom: 1.2rem;
+    }
+    .about-text p strong { color: var(--gold-deep); font-weight: 600; }
+
+    .temple-emblem {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .gopuram-art { width: 180px; height: 240px; position: relative; }
+    .gopuram-art svg { width: 100%; height: 100%; }
+
+    /* ─── DEITY ─── */
+    #deity {
+      background: radial-gradient(ellipse at center, var(--paper) 0%, var(--cream) 70%);
+      text-align: center;
+    }
+    .deity-card {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(145deg, rgba(168,117,42,0.08), rgba(193,90,26,0.04));
+      border: 1px solid rgba(168,117,42,0.3);
+      border-radius: 4px;
+      padding: 2.5rem 2rem;
+      max-width: 560px;
+      margin: 0 auto;
+      box-shadow: 0 6px 24px rgba(139,90,26,0.08);
+    }
+    .deity-icon { font-size: 4rem; margin-bottom: 1rem; }
+    .deity-name {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.5rem;
+      color: var(--maroon-deep);
+      margin-bottom: 0.25rem;
+    }
+    .deity-name-ml {
+      font-family: 'Noto Serif Malayalam', serif;
+      font-size: 1.1rem;
+      color: var(--saffron);
+      margin-bottom: 1rem;
+    }
+    .deity-desc {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--ink-soft);
+    }
+
+    /* ─── FESTIVALS ─── */
+    #festivals {
+      background: linear-gradient(180deg, var(--cream), var(--cream-2), var(--cream));
+    }
+    .festival-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .festival-card {
+      background: linear-gradient(135deg, rgba(168,117,42,0.08), rgba(255,253,247,0.6));
+      border: 1px solid rgba(168,117,42,0.25);
+      border-top: 3px solid var(--vermilion);
+      padding: 1.75rem 1.5rem;
+      border-radius: 2px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .festival-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(168,117,42,0.18);
+    }
+    .festival-card .icon { font-size: 2.2rem; margin-bottom: 0.75rem; }
+    .festival-card h3 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1rem;
+      color: var(--maroon-deep);
+      margin-bottom: 0.5rem;
+    }
+    .festival-card p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+    .festival-month {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--saffron);
+      margin-top: 0.75rem;
+    }
+
+    /* ─── TIMINGS ─── */
+    #timings {
+      background: radial-gradient(ellipse at top, var(--cream-2), var(--cream) 60%);
+    }
+    .timings-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      background: var(--paper);
+      box-shadow: 0 2px 16px rgba(139,90,26,0.06);
+    }
+    .timings-table th {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      color: var(--gold-deep);
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(168,117,42,0.35);
+      text-align: left;
+    }
+    .timings-table td {
+      padding: 0.9rem 1rem;
+      font-size: 1rem;
+      color: var(--ink-soft);
+      border-bottom: 1px solid rgba(58,36,18,0.06);
+    }
+    .timings-table tr:hover td { background: rgba(168,117,42,0.06); }
+    .timing-name { color: var(--maroon-deep); font-weight: 600; }
+    .timing-ml {
+      font-family: 'Noto Serif Malayalam', serif;
+      font-size: 0.9rem;
+      color: var(--ink-faint);
+      display: block;
+    }
+
+    /* Session divider row */
+    .timings-table tr.session-label td {
+      background: rgba(168,117,42,0.1);
+      color: var(--saffron);
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid rgba(168,117,42,0.25);
+    }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      background: linear-gradient(180deg, var(--cream), var(--cream-2));
+      text-align: center;
+    }
+    .contact-box {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      background: var(--paper);
+      border: 1px solid rgba(168,117,42,0.25);
+      padding: 3rem 3.5rem;
+      border-radius: 4px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 6px 24px rgba(139,90,26,0.08);
+    }
+    .contact-row { display: flex; align-items: flex-start; gap: 1rem; text-align: left; width: 100%; }
+    .contact-icon { font-size: 1.4rem; color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+    .contact-label {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--saffron);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    .contact-value { font-size: 1rem; color: var(--ink-soft); line-height: 1.5; }
+
+    /* ─── GALLERY ─── */
+    #gallery {
+      background: linear-gradient(180deg, var(--cream), var(--cream-2), var(--cream));
+    }
+
+    .gallery-grid {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 0;
-      gap: 0;
-    }
-    nav a {
-      color: rgba(168,207,196,0.55);
-      text-decoration: none;
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      padding: 1rem 1.1rem;
-      border-bottom: 2px solid transparent;
-      transition: all 0.25s;
-      white-space: nowrap;
-    }
-    nav a:hover { color: var(--river-pale); border-bottom-color: rgba(168,207,196,0.35); }
-    nav a.active { color: var(--gold-light); border-bottom-color: var(--gold); }
-
-    /* ── REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.75s ease, transform 0.75s ease;
-    }
-    .reveal.visible { opacity:1; transform:translateY(0); }
-
-    /* ── SECTION BASE ── */
-    section { padding: 5rem 1.5rem; }
-    .inner { max-width: 960px; margin: 0 auto; }
-
-    .section-tag {
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--river-light);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
-    }
-    .section-tag::before, .section-tag::after {
-      content:'';
-      flex:1;
-      max-width: 36px;
-      height: 1px;
-      background: var(--river-light);
-      opacity: 0.4;
-    }
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 400;
-      color: var(--text-dark);
-      line-height: 1.2;
-      margin-bottom: 2.5rem;
-    }
-    .section-title.centered { text-align: center; }
-    .section-tag.centered { justify-content: center; }
-    .section-tag.centered::before, .section-tag.centered::after { max-width: 60px; }
-
-    /* ── ABOUT ── */
-    #about { background: var(--cream); }
-    .about-layout {
-      display: grid;
-      grid-template-columns: 5fr 4fr;
-      gap: 4rem;
-      align-items: start;
-    }
-    @media(max-width:680px) { .about-layout { grid-template-columns:1fr; gap:2rem; } }
-
-    .about-body p {
-      font-size: 1.05rem;
-      line-height: 1.95;
-      color: var(--text-mid);
-      margin-bottom: 1.3rem;
-      font-weight: 300;
-    }
-
-    .pull-quote {
-      border-left: 2px solid var(--river-light);
-      padding: 1rem 1.5rem;
-      margin: 2rem 0;
-      background: rgba(74,140,124,0.05);
-      border-radius: 0 4px 4px 0;
-    }
-    .pull-quote p {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem !important;
-      font-style: italic;
-      color: var(--river-deep) !important;
-      line-height: 1.7 !important;
-      margin: 0 !important;
-    }
-
-    .about-aside {
-      position: sticky;
-      top: 6rem;
-    }
-    .river-card {
-      background: var(--river-deep);
-      border-radius: 8px;
-      overflow: hidden;
-      padding: 2rem 1.75rem;
-      color: var(--river-pale);
-    }
-    .river-card-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(168,207,196,0.5);
-      margin-bottom: 0.75rem;
-    }
-    .river-card-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      font-weight: 400;
-      color: #e8dcc8;
-      margin-bottom: 1rem;
-      line-height: 1.3;
-    }
-    .river-card p {
-      font-size: 0.88rem;
-      line-height: 1.8;
-      color: rgba(168,207,196,0.65);
-      margin-bottom: 0.75rem;
-    }
-    .river-card-divider {
-      width: 40px; height: 1px;
-      background: rgba(201,151,43,0.4);
-      margin: 1.25rem 0;
-    }
-    .river-stat {
-      display: flex;
-      align-items: baseline;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-    .river-stat .num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
-      font-weight: 300;
-      color: var(--gold-light);
-      line-height: 1;
-    }
-    .river-stat .unit {
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      color: rgba(168,207,196,0.5);
-    }
-
-    /* ── DEITY ── */
-    #deity { background: var(--sand); }
-    .deity-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      flex-wrap: wrap;
       gap: 1.5rem;
     }
-    @media(max-width:600px) { .deity-grid { grid-template-columns:1fr; } }
-
-    .deity-card {
-      background: var(--cream);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .deity-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(26,58,58,0.1);
-    }
-    .deity-card-header {
-      background: var(--river-deep);
-      padding: 1.5rem 1.75rem;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-    .deity-card-header h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
-      font-weight: 400;
-      color: #f0e8d4;
-      line-height: 1.2;
-    }
-    .deity-card-header .ml {
-      font-family: 'Noto Serif Malayalam', serif;
-      font-size: 0.85rem;
-      color: rgba(168,207,196,0.5);
-      display: block;
-      margin-top: 0.15rem;
-    }
-    .deity-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem;
-      font-weight: 300;
-      color: rgba(168,207,196,0.12);
-      line-height: 1;
-      flex-shrink: 0;
-    }
-    .deity-card-body {
-      padding: 1.5rem 1.75rem;
-    }
-    .deity-card-body p {
-      font-size: 0.9rem;
-      line-height: 1.85;
-      color: var(--text-mid);
-      font-weight: 300;
-      margin-bottom: 1.25rem;
-    }
-    .shloka-box {
-      border-top: 1px solid var(--border);
-      padding-top: 1.1rem;
-    }
-    .shloka-box p {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.95rem !important;
-      font-style: italic;
-      color: var(--river-deep) !important;
-      line-height: 1.8 !important;
-      margin-bottom: 0.25rem !important;
-    }
-    .shloka-box cite {
-      font-family: 'Jost', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-      font-style: normal;
-    }
-
-    /* ── NAGAR KAVU ── */
-    #nagarkavu {
-      background: var(--river-deep);
-      color: var(--river-pale);
-    }
-    #nagarkavu .section-tag { color: var(--river-pale); }
-    #nagarkavu .section-tag::before, #nagarkavu .section-tag::after { background: var(--river-pale); }
-    #nagarkavu .section-title { color: #f0e8d4; }
-
-    .kavu-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: start;
-    }
-    @media(max-width:680px) { .kavu-layout { grid-template-columns:1fr; } }
-
-    .kavu-text p {
-      font-size: 0.92rem;
-      line-height: 1.95;
-      color: rgba(168,207,196,0.72);
-      margin-bottom: 1.1rem;
-      font-weight: 300;
-    }
-    .kavu-text p strong { color: var(--river-pale); font-weight: 400; }
-    .kavu-text p em { color: var(--gold-light); font-style: normal; }
-
-    .kavu-rituals {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .ritual-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(168,207,196,0.12);
-      border-radius: 6px;
-      padding: 1.25rem 1.5rem;
-    }
-    .ritual-card h4 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem;
-      font-weight: 400;
-      color: #e8dcc8;
-      margin-bottom: 0.4rem;
-    }
-    .ritual-card p {
-      font-size: 0.85rem;
-      line-height: 1.75;
-      color: rgba(168,207,196,0.6);
-      font-weight: 300;
-    }
-    .ritual-tag {
-      display: inline-block;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      border: 1px solid rgba(201,151,43,0.3);
-      padding: 0.2rem 0.7rem;
-      border-radius: 2px;
-      margin-top: 0.6rem;
-    }
-
-    /* ── FESTIVALS ── */
-    #festivals { background: var(--cream); }
-    .festival-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .festival-row {
-      display: grid;
-      grid-template-columns: 180px 1fr auto;
-      align-items: start;
-      padding: 1.75rem 2rem;
-      border-bottom: 1px solid var(--border);
-      gap: 2rem;
-      transition: background 0.2s;
-    }
-    .festival-row:last-child { border-bottom: none; }
-    .festival-row:hover { background: rgba(74,140,124,0.04); }
-    @media(max-width:680px) {
-      .festival-row { grid-template-columns:1fr; gap:0.5rem; padding:1.25rem 1.25rem; }
-    }
-    .festival-row-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
-      font-weight: 400;
-      color: var(--text-dark);
-      line-height: 1.3;
-    }
-    .festival-row-desc {
-      font-size: 0.875rem;
-      line-height: 1.8;
-      color: var(--text-mid);
-      font-weight: 300;
-    }
-    .festival-row-month {
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--river-mid);
-      white-space: nowrap;
-      padding-top: 0.25rem;
-      text-align: right;
-    }
-    @media(max-width:680px) { .festival-row-month { text-align: left; } }
-
-    /* ── TIMINGS ── */
-    #timings { background: var(--sand); }
-    .timings-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-    @media(max-width:640px) { .timings-wrap { grid-template-columns:1fr; } }
-
-    .timing-session {
-      background: var(--cream);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .timing-session-header {
-      background: var(--river-deep);
-      padding: 0.85rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .timing-session-header span {
-      font-size: 0.68rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(168,207,196,0.65);
-      font-weight: 500;
-    }
-    .timing-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--river-pale);
-      opacity: 0.4;
-    }
-    .timing-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.1rem 1.5rem;
-      border-bottom: 1px solid var(--border);
-      gap: 1rem;
-    }
-    .timing-item:last-child { border-bottom: none; }
-    .timing-item.highlight { background: rgba(74,140,124,0.06); }
-    .timing-name-block { flex: 1; }
-    .timing-name-block .name {
-      font-size: 0.95rem;
-      font-weight: 400;
-      color: var(--text-dark);
-    }
-    .timing-name-block .ml {
-      font-family: 'Noto Serif Malayalam', serif;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-    .timing-time {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 500;
-      color: var(--river-deep);
-      white-space: nowrap;
-    }
-    .timing-item.highlight .timing-time { color: var(--saffron); }
-    .timing-note {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      text-align: right;
-      min-width: 90px;
-    }
-    @media(max-width:480px) { .timing-note { display: none; } }
-    .timings-note {
-      margin-top: 1.25rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-style: italic;
-      text-align: center;
-    }
-
-    /* ── CONTACT ── */
-    #contact { background: var(--cream); }
-    .contact-layout {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 3rem;
-      align-items: start;
-    }
-    @media(max-width:680px) { .contact-layout { grid-template-columns:1fr; } }
-
-    .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
-    .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
-    .contact-icon-wrap {
-      width: 36px; height: 36px; border-radius: 6px;
-      background: var(--river-deep);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .contact-icon-wrap svg { width: 16px; height: 16px; stroke: var(--river-pale); fill: none; stroke-width: 1.5; stroke-linecap: round; }
-    .contact-item-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--river-mid);
-      margin-bottom: 0.25rem;
-    }
-    .contact-item-value {
-      font-size: 0.92rem;
-      color: var(--text-mid);
-      line-height: 1.65;
-      font-weight: 300;
-    }
-    .contact-item-value a { color: var(--river-mid); text-decoration: none; border-bottom: 1px solid var(--border-strong); }
-    .contact-item-value a:hover { color: var(--river-deep); }
-
-    .map-wrap {
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-    .map-wrap iframe {
-      display: block;
-      width: 100%;
-      height: 320px;
-      border: none;
-      filter: saturate(0.85);
-    }
-
-    /* ── GALLERY ── */
-    #gallery { background: var(--sand); }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-    @media(max-width:640px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
 
     .gallery-item {
       position: relative;
-      aspect-ratio: 3/4;
-      overflow: hidden;
-      border-radius: 4px;
-      cursor: zoom-in;
-      background: var(--river-deep);
-    }
-    .gallery-item:nth-child(3), .gallery-item:nth-child(5) {
-      aspect-ratio: 3/4;
-    }
-    .gallery-item img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.5s ease, filter 0.5s ease;
-      filter: saturate(0.9) brightness(0.95);
-    }
-    .gallery-item:hover img {
-      transform: scale(1.06);
-      filter: saturate(1.05) brightness(1.02);
-    }
-    .gallery-item-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 50%, rgba(26,58,58,0.55) 100%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      display: flex;
-      align-items: flex-end;
-      padding: 1rem;
-    }
-    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
-    .gallery-item-overlay span {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      color: rgba(240,232,212,0.8);
+      flex-shrink: 0;
+      width: 220px;
+      height: auto;
     }
 
-    /* ── LIGHTBOX ── */
+    .gallery-item img {
+      width: 220px;
+      height: auto;
+      border-radius: 4px;
+      display: block;
+      cursor: zoom-in;
+      box-shadow: 0 4px 20px rgba(139,90,26,0.18);
+      position: relative;
+      z-index: 1;
+      /* Desktop: smooth hover zoom */
+      transition:
+        transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.45s ease,
+        filter 0.45s ease;
+    }
+
+    /* Hover zoom only on non-touch devices */
+    @media (hover: hover) and (pointer: fine) {
+      .gallery-item img:hover {
+        transform: scale(1.55);
+        box-shadow:
+          0 10px 40px rgba(139,90,26,0.3),
+          0 20px 60px rgba(0,0,0,0.15);
+        filter: brightness(1.03) saturate(1.08);
+        z-index: 10;
+      }
+    }
+
+    /* Touch devices: subtle press feedback instead */
+    @media (hover: none) {
+      .gallery-item img:active {
+        filter: brightness(1.05) saturate(1.1);
+        transform: scale(1.02);
+        transition: transform 0.15s ease, filter 0.15s ease;
+      }
+      .gallery-item {
+        width: clamp(140px, 40vw, 220px);
+      }
+      .gallery-item img {
+        width: 100%;
+      }
+    }
+
+    /* ─── UNIFIED LIGHTBOX ─── */
     #lightbox {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(13,42,40,0.94);
+      background: rgba(20,12,4,0.85);
       z-index: 9999;
       align-items: center;
       justify-content: center;
+      cursor: zoom-out;
+      /* Fade in */
+      animation: lbFadeIn 0.25s ease both;
     }
     #lightbox.open { display: flex; }
+    @keyframes lbFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
     #lightbox-img {
-      max-width: 88vw;
-      max-height: 88vh;
+      max-width: 90vw;
+      max-height: 90vh;
       object-fit: contain;
       border-radius: 4px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 60px rgba(201,151,43,0.15);
+      animation: lbImgIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
     }
+    @keyframes lbImgIn {
+      from { transform: scale(0.88); opacity: 0; }
+      to   { transform: scale(1);    opacity: 1; }
+    }
+
     .lb-btn {
       position: fixed;
-      background: rgba(168,207,196,0.1);
-      border: 1px solid rgba(168,207,196,0.2);
-      color: rgba(168,207,196,0.8);
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.35);
+      color: white;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.2s;
-      font-size: 1.2rem;
+      line-height: 1;
+      transition: background 0.2s, opacity 0.2s;
+    }
+    .lb-btn:hover { background: rgba(255,255,255,0.28); }
+    .lb-btn:disabled { opacity: 0.2; pointer-events: none; cursor: default; }
+
+    #lb-prev, #lb-next {
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2.5rem;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+    }
+    #lb-prev { left: 1.25rem; }
+    #lb-next { right: 1.25rem; }
+    #lb-close {
+      top: 1.25rem;
+      right: 1.5rem;
+      font-size: 1.5rem;
       width: 2.5rem;
       height: 2.5rem;
       border-radius: 50%;
     }
-    .lb-btn:hover { background: rgba(168,207,196,0.2); }
-    .lb-btn:disabled { opacity: 0.2; pointer-events: none; }
-    #lb-prev { position: fixed; top: 50%; left: 1.5rem; transform: translateY(-50%); }
-    #lb-next { position: fixed; top: 50%; right: 1.5rem; transform: translateY(-50%); }
-    #lb-close { position: fixed; top: 1.5rem; right: 1.5rem; font-size: 1rem; }
-    #lb-counter { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); font-size: 0.78rem; letter-spacing: 0.12em; color: rgba(168,207,196,0.4); }
+    #lb-counter {
+      position: fixed;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+    }
 
-    /* ── FOOTER ── */
+    /* ─── FOOTER ─── */
     footer {
-      background: var(--river-deep);
-      color: rgba(168,207,196,0.45);
+      background: var(--cream-2);
+      border-top: 1px solid rgba(168,117,42,0.25);
       text-align: center;
-      padding: 2.5rem 1rem;
-      border-top: 1px solid rgba(168,207,196,0.08);
+      padding: 2rem 1rem;
     }
-    footer .foot-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 400;
-      color: rgba(240,232,212,0.6);
-      margin-bottom: 0.4rem;
+    footer .footer-om { font-size: 1.8rem; color: var(--gold); opacity: 0.7; margin-bottom: 0.5rem; }
+    footer p { font-size: 0.85rem; color: var(--ink-faint); letter-spacing: 0.05em; }
+    footer p span { color: var(--gold-deep); opacity: 0.85; }
+
+    .gold-rule {
+      width: 100%;
+      max-width: 400px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--vermilion) 50%, var(--gold) 70%, transparent);
+      margin: 0 auto 2rem;
     }
-    footer p { font-size: 0.78rem; line-height: 1.9; }
-    footer .ml { font-family: 'Noto Serif Malayalam', serif; font-size: 0.8rem; color: rgba(168,207,196,0.3); }
   </style>
 </head>
 <body>
 
-<!-- HERO -->
+<!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero" id="home">
-  <div class="hero-water" aria-hidden="true">
-    <div class="water-layer sky"></div>
-    <!-- ripple lines -->
-    <div class="ripple" style="top:38%"></div>
-    <div class="ripple" style="top:44%; opacity:0.6;"></div>
-    <div class="ripple" style="top:50%; opacity:0.9;"></div>
-    <div class="ripple" style="top:56%; opacity:0.7;"></div>
-    <div class="ripple" style="top:62%; opacity:0.5;"></div>
-    <div class="ripple" style="top:67%; opacity:0.4;"></div>
-    <div class="ripple" style="top:72%; opacity:0.3;"></div>
-    <!-- tree silhouettes SVG -->
-    <svg class="trees" viewBox="0 0 1440 220" preserveAspectRatio="xMidYMax slice" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- left cluster -->
-      <path d="M0 220 L0 120 Q30 80 60 120 L60 220Z" fill="#0d2a28" opacity="0.9"/>
-      <path d="M30 220 L30 100 Q65 55 95 100 L95 220Z" fill="#112e2c" opacity="0.85"/>
-      <path d="M70 220 L70 130 Q90 100 115 130 L115 220Z" fill="#0d2a28"/>
-      <path d="M100 220 L100 80 Q140 30 180 80 L180 220Z" fill="#0f3030" opacity="0.95"/>
-      <path d="M155 220 L155 110 Q175 85 200 110 L200 220Z" fill="#0d2a28"/>
-      <path d="M185 220 L185 95 Q220 50 260 95 L260 220Z" fill="#112e2c" opacity="0.9"/>
-      <path d="M240 220 L240 130 Q260 105 285 130 L285 220Z" fill="#0d2a28"/>
-      <!-- right cluster -->
-      <path d="M1440 220 L1440 120 Q1410 80 1380 120 L1380 220Z" fill="#0d2a28" opacity="0.9"/>
-      <path d="M1410 220 L1410 100 Q1375 55 1345 100 L1345 220Z" fill="#112e2c" opacity="0.85"/>
-      <path d="M1370 220 L1370 130 Q1350 100 1325 130 L1325 220Z" fill="#0d2a28"/>
-      <path d="M1340 220 L1340 80 Q1300 30 1260 80 L1260 220Z" fill="#0f3030" opacity="0.95"/>
-      <path d="M1285 220 L1285 110 Q1265 85 1240 110 L1240 220Z" fill="#0d2a28"/>
-      <path d="M1255 220 L1255 95 Q1220 50 1180 95 L1180 220Z" fill="#112e2c" opacity="0.9"/>
-      <path d="M1200 220 L1200 130 Q1180 105 1155 130 L1155 220Z" fill="#0d2a28"/>
-      <!-- ground -->
-      <rect x="0" y="200" width="1440" height="20" fill="#0a2220"/>
+  <div class="hero-lotus" aria-hidden="true">
+    <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke-linecap="round">
+        <!-- outer ring of petals -->
+        <g stroke="#b83a24" stroke-width="1" opacity="0.14">
+          <path d="M300 300 C300 190 350 120 300 40 C250 120 300 190 300 300 Z" transform="rotate(0 300 300)"/>
+          <path d="M300 300 C300 190 350 120 300 40 C250 120 300 190 300 300 Z" transform="rotate(30 300 300)"/>
+          <path d="M300 300 C300 190 350 120 300 40 C250 120 300 190 300 300 Z" transform="rotate(60 300 300)"/>
+          <path d="M300 300 C300 190 350 120 300 40 C250 120 300 190 300 300 Z" transform="rotate(90 300 300)"/>
+          <path d="M300 300 C300 190 350 120 300 40 C250 120 300 190 300 300 Z" transform="rotate(120 300 300)"/>
+          <path d="M300 300 C300 190 350 120 300 40 C250 120 300 190 300 300 Z" transform="rotate(150 300 300)"/>
+          <path d="M300 300 C300 190 350 120 300 40 C250 120 300 190 300 300 Z" transform="rotate(180 300 300)"/>
+          <path d="M300 300 C300 190 350 120 300 40 C250 120 300 190 300 300 Z" transform="rotate(210 300 300)"/>
+          <path d="M300 300 C300 190 350 120 300 40 C250 120 300 190 300 300 Z" transform="rotate(240 300 300)"/>
+          <path d="M300 300 C300 190 350 120 300 40 C250 120 300 190 300 300 Z" transform="rotate(270 300 300)"/>
+          <path d="M300 300 C300 190 350 120 300 40 C250 120 300 190 300 300 Z" transform="rotate(300 300 300)"/>
+          <path d="M300 300 C300 190 350 120 300 40 C250 120 300 190 300 300 Z" transform="rotate(330 300 300)"/>
+        </g>
+        <!-- inner ring of petals -->
+        <g stroke="#ab7a2e" stroke-width="1.2" opacity="0.22">
+          <path d="M300 300 C300 225 335 175 300 120 C265 175 300 225 300 300 Z" transform="rotate(15 300 300)"/>
+          <path d="M300 300 C300 225 335 175 300 120 C265 175 300 225 300 300 Z" transform="rotate(45 300 300)"/>
+          <path d="M300 300 C300 225 335 175 300 120 C265 175 300 225 300 300 Z" transform="rotate(75 300 300)"/>
+          <path d="M300 300 C300 225 335 175 300 120 C265 175 300 225 300 300 Z" transform="rotate(105 300 300)"/>
+          <path d="M300 300 C300 225 335 175 300 120 C265 175 300 225 300 300 Z" transform="rotate(135 300 300)"/>
+          <path d="M300 300 C300 225 335 175 300 120 C265 175 300 225 300 300 Z" transform="rotate(165 300 300)"/>
+          <path d="M300 300 C300 225 335 175 300 120 C265 175 300 225 300 300 Z" transform="rotate(195 300 300)"/>
+          <path d="M300 300 C300 225 335 175 300 120 C265 175 300 225 300 300 Z" transform="rotate(225 300 300)"/>
+          <path d="M300 300 C300 225 335 175 300 120 C265 175 300 225 300 300 Z" transform="rotate(255 300 300)"/>
+          <path d="M300 300 C300 225 335 175 300 120 C265 175 300 225 300 300 Z" transform="rotate(285 300 300)"/>
+          <path d="M300 300 C300 225 335 175 300 120 C265 175 300 225 300 300 Z" transform="rotate(315 300 300)"/>
+          <path d="M300 300 C300 225 335 175 300 120 C265 175 300 225 300 300 Z" transform="rotate(345 300 300)"/>
+        </g>
+        <!-- soft outer circle -->
+        <circle cx="300" cy="300" r="270" stroke="#ab7a2e" stroke-width="1" opacity="0.12"/>
+        <circle cx="300" cy="300" r="230" stroke="#b83a24" stroke-width="0.8" opacity="0.12"/>
+      </g>
     </svg>
-    <!-- petals -->
-    <div class="petal" style="left:15%;top:-10px;background:#d4a8c0;animation-duration:8s;animation-delay:0s;"></div>
-    <div class="petal" style="left:28%;top:-10px;background:#e8c880;animation-duration:11s;animation-delay:2s;"></div>
-    <div class="petal" style="left:42%;top:-10px;background:#c8d8a0;animation-duration:9s;animation-delay:4s;"></div>
-    <div class="petal" style="left:58%;top:-10px;background:#e8c880;animation-duration:13s;animation-delay:1s;"></div>
-    <div class="petal" style="left:72%;top:-10px;background:#d4a8c0;animation-duration:10s;animation-delay:3s;"></div>
-    <div class="petal" style="left:85%;top:-10px;background:#c8d8a0;animation-duration:12s;animation-delay:5s;"></div>
   </div>
 
-  <div class="hero-content">
-    <div class="hero-badge">Trivandrum District · Kerala</div>
-    <p class="hero-ml" lang="ml">ശ്രീ കൃഷ്ണ ക്ഷേത്രം</p>
-    <h1 class="hero-title">Sree Krishna<br/>Temple</h1>
-    <p class="hero-sub">Krishnapuram Brahmana Samudayam · Neyyattinkara</p>
-    <div class="hero-divider" aria-hidden="true">
-      <div class="hero-divider-line"></div>
-      <div class="hero-divider-dot"></div>
-      <div class="hero-divider-dot" style="opacity:0.4;width:3px;height:3px;"></div>
-      <div class="hero-divider-dot"></div>
-      <div class="hero-divider-line r"></div>
-    </div>
-    <p class="hero-verse">
-      "Sarva-dharman parityajya<br/>mam ekam sharanam vraja"
-      <cite>— Bhagavad Gita 18.66</cite>
-    </p>
-  </div>
+  <div class="om-symbol" aria-hidden="true">🪔🪷🪔</div>
+  <img
+    src="Krishan01.jpg"
+    id="thumbnail"
+    alt="Sri Krishna idol at the sanctum sanctorum"
+    style="width:120px; cursor:zoom-in; border-radius:4px; box-shadow:0 6px 24px rgba(139,90,26,0.25);"
+    onclick="openLightbox(this, 'hero')"
+  />
 
-  <div class="hero-scroll" aria-hidden="true">
-    <div class="scroll-line"></div>
-    <span>Explore</span>
+  <p class="hero-malayalam" lang="ml">ശ്രീ കൃഷ്ണ ക്ഷേത്രം</p>
+  <h1 class="hero-title" style="font-size:1.8rem; margin-top:0.25rem; color:var(--ink-soft); font-weight:400;">Krishnapuram Brahamana Samudayam</h1>
+  <h2 class="hero-title" style="font-size:1.2rem; margin-top:0.5rem; color:var(--ink-soft); font-weight:400;">Trivandrum District, Kerala State</h2>
+  <div class="hero-divider" aria-hidden="true"></div>
+  <p class="hero-verse">
+    "Sarva-dharman parityajya<br/>
+    mam ekam sharanam vraja"<br/>
+    <span style="font-size:0.85em; color:var(--ink-faint);">— Bhagavad Gita 18.66</span>
+  </p>
+
+  <div class="scroll-cue" aria-hidden="true">
+    <span>▾</span>
+    Explore
   </div>
 </section>
 
-<!-- NAV -->
+<!-- ═══════════════ NAV ═══════════════ -->
 <nav aria-label="Main navigation">
   <a href="#home">Home</a>
   <a href="#about">About</a>
@@ -904,405 +630,558 @@
   <a href="#gallery">Gallery</a>
 </nav>
 
-<!-- ABOUT -->
+<!-- ═══════════════ ABOUT ═══════════════ -->
 <section id="about">
-  <div class="inner">
-    <div class="section-tag reveal">About the temple</div>
-    <h2 class="section-title reveal">An ancient shrine by<br/>the Neyyar River</h2>
-    <div class="about-layout">
-      <div class="about-body reveal">
-        <p>Krishnapuram Brahmana Samudayam, <strong style="font-weight:400;color:var(--text-dark)">Sri Krishna Swamy Temple</strong>, Neyyattinkara, is an ancient and powerful shrine in south Kerala dedicated to Lord Sri Krishna. The temple is situated in beautiful, serene and natural green surroundings by the side of the Neyyar River.</p>
-        <div class="pull-quote">
-          <p>"The idol which was planned for a new temple was installed here, since this powerful deity had to face east — on the banks of the Neyyar river, surrounded with vedic mantras."</p>
-        </div>
-        <p>The history behind the construction of this temple is that the Travancore prince Anizhamthirunal Marthanda Varma constructed an agraharam and temple to accommodate brahmins. The idol, originally planned for the temple near ammachi plavu, was installed here owing to the sacred geography of this site.</p>
+  <div class="section-inner">
+    <h2 class="section-heading reveal">About the Temple</h2>
+    <p class="section-ornament reveal" aria-hidden="true">❧ ✦ ❧</p>
+    <div class="gold-rule reveal" aria-hidden="true"></div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          Krishnapuram Brahmana Samudayam, <strong>Sri Krishna Swamy Temple</strong>, Neyyattinkara, an ancient and powerful shrine in south Kerala, is dedicated to Lord Sri Krishna. This temple is situated in beautiful serene and natural green surroundings by the side of Neyyar River.
+        </p>
+        <p>
+          This temple is of great historic importance as well. The history behind the construction of this temple is that, the Travancore prince Anizhamthirunal Marthanda Varma constructed an agraharam and temple to accommodate brahmins and then the idol which was planned to be installed in the new temple where ammachi plavu is located, was installed here in our temple, since the powerful idol had to be installed facing east direction in banks of Neyyar river and in an environment surrounded with vedic mantras.
+        </p>
       </div>
-      <div class="about-aside reveal">
-        <div class="river-card">
-          <div class="river-card-label">Sacred geography</div>
-          <h3 class="river-card-title">By the banks of Neyyar</h3>
-          <p>The Neyyar River — one of the perennial rivers of South Kerala — flows close to the temple, lending the site a natural sanctity that has drawn devotees for generations.</p>
-          <div class="river-card-divider" aria-hidden="true"></div>
-          <div class="river-stat">
-            <span class="num">East</span>
-            <span class="unit">Facing deity</span>
-          </div>
-          <div class="river-stat" style="margin-top:0.75rem;">
-            <span class="num">2</span>
-            <span class="unit">Principal deities</span>
-          </div>
-          <div class="river-stat" style="margin-top:0.75rem;">
-            <span class="num">6+</span>
-            <span class="unit">Annual festivals</span>
-          </div>
+      <div class="temple-emblem reveal">
+        <div class="gopuram-art" aria-hidden="true">
+          <svg viewBox="0 0 180 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="210" width="160" height="20" fill="#a8752a" opacity="0.35" rx="1"/>
+            <rect x="20" y="200" width="140" height="12" fill="#a8752a" opacity="0.45" rx="1"/>
+            <rect x="50" y="170" width="80" height="32" fill="none" stroke="#a8752a" stroke-width="1.2" opacity="0.6"/>
+            <rect x="58" y="140" width="64" height="32" fill="none" stroke="#a8752a" stroke-width="1.2" opacity="0.65"/>
+            <rect x="66" y="112" width="48" height="30" fill="none" stroke="#a8752a" stroke-width="1.2" opacity="0.7"/>
+            <rect x="72" y="86" width="36" height="28" fill="none" stroke="#a8752a" stroke-width="1.2" opacity="0.75"/>
+            <rect x="76" y="62" width="28" height="26" fill="none" stroke="#a8752a" stroke-width="1.2" opacity="0.8"/>
+            <rect x="80" y="40" width="20" height="24" fill="none" stroke="#a8752a" stroke-width="1.4" opacity="0.85"/>
+            <polygon points="90,6 80,40 100,40" fill="#a8752a" opacity="0.55"/>
+            <circle cx="90" cy="6" r="4" fill="#c9972b" opacity="0.9"/>
+            <path d="M72 202 Q90 185 108 202" stroke="#a8752a" stroke-width="1.5" fill="none" opacity="0.7"/>
+            <rect x="78" y="185" width="24" height="17" fill="none" stroke="#a8752a" stroke-width="1" opacity="0.6"/>
+            <circle cx="90" cy="155" r="2" fill="#a8752a" opacity="0.5"/>
+            <circle cx="90" cy="126" r="2" fill="#a8752a" opacity="0.5"/>
+            <circle cx="90" cy="100" r="2" fill="#a8752a" opacity="0.5"/>
+          </svg>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DEITY -->
+<!-- ═══════════════ DEITY ═══════════════ -->
 <section id="deity">
-  <div class="inner">
-    <div class="section-tag centered reveal">Presiding deities</div>
-    <h2 class="section-title centered reveal">Divine presence</h2>
-    <div class="deity-grid">
-      <div class="deity-card reveal">
-        <div class="deity-card-header">
-          <div>
-            <h3>Lord Sree Krishna</h3>
-            <span class="ml" lang="ml">ശ്രീ കൃഷ്ണ ഭഗവാൻ</span>
-          </div>
-          <div class="deity-number" aria-hidden="true">01</div>
-        </div>
-        <div class="deity-card-body">
-          <p>The presiding deity, eighth avatar of Lord Vishnu, revered as the Supreme Being in Vaishnavism. Worshipped here in Chaturbhuja form — holding the Sudarshana Chakra, Panchajanya conch, Kaumodaki mace, and a lotus — radiating eternal love, wisdom, and protection.</p>
-          <div class="shloka-box">
-            <p>"Yada yada hi dharmasya, glanir bhavati Bharata<br/>abhyutthanam adharmasya, tadatmanam srijamy aham"</p>
-            <cite>— Bhagavad Gita 4.7</cite>
-          </div>
-        </div>
+  <div class="section-inner">
+    <h2 class="section-heading reveal">Presiding Deity</h2>
+    <p class="section-ornament reveal" aria-hidden="true">☸ ✦ ☸</p>
+    <div class="gold-rule reveal" aria-hidden="true"></div>
+
+    <div class="deity-card reveal" style="margin-bottom: 2.5rem;">
+      <div class="deity-icon" aria-hidden="true">🪈</div>
+      <h3 class="deity-name">Lord Sree Krishna</h3>
+      <p class="deity-name-ml" lang="ml">ശ്രീ കൃഷ്ണ ഭഗവാൻ</p>
+      <div style="width:80px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin: 0 auto 1rem;" aria-hidden="true"></div>
+      <p class="deity-desc">
+        The presiding deity is <strong style="color:var(--gold-deep)">Lord Sree Krishna</strong>, the eighth avatar of Lord Vishnu, revered as the Supreme Being in Vaishnavism. He is worshipped here in his <em>Chaturbhuja</em> form — holding the Sudarshana Chakra, Panchajanya conch, Kaumodaki mace, and a lotus — radiating eternal love, wisdom, and protection to all devotees.
+      </p>
+      <div style="margin-top: 1.25rem; padding: 1rem; border: 1px solid rgba(168,117,42,0.25); border-radius:2px; background: rgba(168,117,42,0.05);">
+        <p style="font-style:italic; font-size:1rem; color:var(--ink-soft); line-height:1.8;">
+          "Yada yada hi dharmasya, glanir bhavati Bharata<br/>
+          abhyutthanam adharmasya, tadatmanam srijamy aham"
+        </p>
+        <p style="font-size:0.8rem; color:var(--saffron); margin-top:0.5rem;">— Bhagavad Gita 4.7</p>
       </div>
-      <div class="deity-card reveal">
-        <div class="deity-card-header">
-          <div>
-            <h3>Lord Ganapathy</h3>
-            <span class="ml" lang="ml">ഗണപതി ഭഗവാൻ</span>
-          </div>
-          <div class="deity-number" aria-hidden="true">02</div>
-        </div>
-        <div class="deity-card-body">
-          <p>Vighneshwara — the remover of all obstacles. Enshrined within the temple complex, depicted in Gajanana form with a broken tusk, modaka sweet in hand, and his beloved mouse at his feet, symbolising grace over the mightiest obstacles.</p>
-          <div class="shloka-box">
-            <p>"Vakratunda Mahakaya, Suryakoti Samaprabha<br/>Nirvighnam Kuru Me Deva, Sarva Karyeshu Sarvada"</p>
-            <cite>— Ganapathi Sloka</cite>
-          </div>
-        </div>
+    </div>
+
+    <div class="deity-card reveal" style="margin-bottom: 0;">
+      <div class="deity-icon" aria-hidden="true">🕉</div>
+      <h3 class="deity-name">Lord Ganapathy</h3>
+      <p class="deity-name-ml" lang="ml">ഗണപതി ഭഗവാൻ</p>
+      <div style="width:80px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin: 0 auto 1rem;" aria-hidden="true"></div>
+      <p class="deity-desc">
+        <strong style="color:var(--gold-deep)">Lord Ganapathy</strong> — the elephant-headed son of Lord Shiva and Goddess Parvati — is enshrined within the temple complex as the <em>Vighneshwara</em>, the remover of all obstacles. Devotees offer prayers to him before commencing any auspicious undertaking, for he bestows wisdom, prosperity, and an auspicious beginning to every endeavour.
+      </p>
+      <p class="deity-desc" style="margin-top:0.85rem;">
+        He is depicted in his <em>Gajanana</em> form with a broken tusk, a modaka sweet in hand, and his beloved vehicle — the mouse — at his feet, symbolising that even the mightiest obstacles can be overcome with divine grace and humility.
+      </p>
+      <div style="margin-top: 1.25rem; padding: 1rem; border: 1px solid rgba(168,117,42,0.25); border-radius:2px; background: rgba(168,117,42,0.05);">
+        <p style="font-style:italic; font-size:1rem; color:var(--ink-soft); line-height:1.8;">
+          "Vakratunda Mahakaya, Suryakoti Samaprabha<br/>
+          Nirvighnam Kuru Me Deva, Sarva Karyeshu Sarvada"
+        </p>
+        <p style="font-size:0.8rem; color:var(--saffron); margin-top:0.5rem;">— Ganapathi Sloka</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ NAGAR KAVU ═══════════════ -->
+<section id="nagarkavu" style="background: radial-gradient(ellipse at bottom, #f4f5e6 0%, #fbf6e9 70%);">
+  <div class="section-inner">
+    <h2 class="section-heading reveal">Nagar Kavu</h2>
+    <p class="section-ornament reveal" aria-hidden="true">🐍 ✦ 🐍</p>
+    <div class="gold-rule reveal" aria-hidden="true"></div>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          Adjacent to the temple lies the sacred <strong>Nagar Kavu</strong> — a serpent grove revered as the abode of <em>Naga Devatas</em> (serpent deities). This ancient grove, nestled near the banks of the <strong>Neyyar River</strong>, is one of the most spiritually potent spots in the Neyyattinkara region.
+        </p>
+        <p>
+          The Nagar Kavu is shaded by old trees — pala, ilippa, and arali — whose roots intertwine with the earth like the coils of the divine serpent. Stone sculptures of <em>Nagaraja</em> and <em>Nagayakshi</em> stand watch beneath the canopy, garlanded with turmeric and sacred threads by generations of devotees.
+        </p>
+        <p>
+          Serpent worship in Kerala is an ancient Dravidian tradition, and the Kavu near Neyyar River carries the prayers of countless families who come here seeking <strong>fertility, family harmony, relief from Sarpa Dosha</strong>, and the welfare of their lineage.
+        </p>
+        <p>
+          The sound of the flowing <strong>Neyyar River</strong> nearby adds a natural sanctity to the grove, believed to amplify the divine energy of the Nagar Kavu and carry the prayers of devotees forward.
+        </p>
+      </div>
+      <div class="temple-emblem reveal">
+        <svg viewBox="0 0 180 240" fill="none" xmlns="http://www.w3.org/2000/svg" width="180" height="240" aria-hidden="true">
+          <ellipse cx="90" cy="225" rx="70" ry="10" fill="#4c6b1f" opacity="0.15"/>
+          <rect x="82" y="130" width="16" height="95" rx="6" fill="#6b4423" opacity="0.55"/>
+          <ellipse cx="90" cy="100" rx="55" ry="60" fill="#4c6b1f" opacity="0.18"/>
+          <ellipse cx="60" cy="115" rx="30" ry="35" fill="#4c6b1f" opacity="0.15"/>
+          <ellipse cx="120" cy="110" rx="32" ry="38" fill="#4c6b1f" opacity="0.15"/>
+          <rect x="60" y="155" width="60" height="30" rx="3" fill="#a8752a" opacity="0.12" stroke="#a8752a" stroke-width="0.8"/>
+          <path d="M90 145 C70 145 55 158 60 168 C65 178 80 175 85 165 C90 155 105 148 115 155 C125 162 120 178 108 180 C96 182 88 175 90 165" stroke="#5c7a2c" stroke-width="3" fill="none" opacity="0.8" stroke-linecap="round"/>
+          <ellipse cx="90" cy="138" rx="14" ry="9" fill="none" stroke="#5c7a2c" stroke-width="1.8" opacity="0.75"/>
+          <ellipse cx="90" cy="136" rx="8" ry="5" fill="#5c7a2c" opacity="0.2"/>
+          <ellipse cx="90" cy="130" rx="5" ry="6" fill="#5c7a2c" opacity="0.75"/>
+          <circle cx="87.5" cy="128.5" r="1" fill="#c9972b" opacity="0.9"/>
+          <circle cx="92.5" cy="128.5" r="1" fill="#c9972b" opacity="0.9"/>
+          <path d="M90 136 L88 139 M90 136 L92 139" stroke="#c15a1a" stroke-width="0.8" opacity="0.8"/>
+          <circle cx="68" cy="153" r="3" fill="#c9972b" opacity="0.6"/>
+          <circle cx="112" cy="153" r="3" fill="#c9972b" opacity="0.6"/>
+          <path d="M15 232 Q35 228 55 232 Q75 236 95 232 Q115 228 135 232 Q155 236 165 232" stroke="#4a8fa8" stroke-width="1.2" fill="none" opacity="0.4"/>
+          <path d="M20 238 Q45 234 70 238 Q95 242 120 238 Q145 234 160 238" stroke="#4a8fa8" stroke-width="0.8" fill="none" opacity="0.28"/>
+        </svg>
+        <p style="font-family:'Cinzel Decorative',serif; font-size:0.65rem; letter-spacing:0.12em; color:#5c7a2c; opacity:0.85; text-align:center; text-transform:uppercase; margin-top:0.5rem;">Nagar Kavu · Neyyar River</p>
+      </div>
+    </div>
+
+    <div class="festival-grid" style="margin-top:2.5rem;">
+      <div class="festival-card reveal">
+        <div class="icon" aria-hidden="true">🐍</div>
+        <h3>Avani Masa Nagar Pooja</h3>
+        <p>The consecration ceremony of serpent deities performed by temple priests with elaborate rituals, mantras, and offerings of turmeric, milk, and flowers.</p>
+      </div>
+      <div class="festival-card reveal">
+        <div class="icon" aria-hidden="true">🌿</div>
+        <h3>Ayilyam Pooja</h3>
+        <p>Special puja performed on Ayilya nakshatra days, believed to be the most auspicious time to worship Naga Devatas and seek relief from ancestral curses.</p>
+        <span class="festival-month">📅 Monthly · Ayilyam Star</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- NAGAR KAVU -->
-<section id="nagarkavu">
-  <div class="inner">
-    <div class="section-tag reveal">Sacred grove</div>
-    <h2 class="section-title reveal">Nagar Kavu</h2>
-    <div class="kavu-layout">
-      <div class="kavu-text reveal">
-        <p>Adjacent to the temple lies the sacred <strong>Nagar Kavu</strong> — a serpent grove revered as the abode of <em>Naga Devatas</em>. Nestled near the banks of the <strong>Neyyar River</strong>, this ancient grove is one of the most spiritually potent spots in the Neyyattinkara region.</p>
-        <p>The Kavu is shaded by old trees — pala, ilippa, and arali — whose roots intertwine with the earth like the coils of the divine serpent. Stone sculptures of <em>Nagaraja</em> and <em>Nagayakshi</em> stand watch beneath the canopy, garlanded with turmeric and sacred threads by generations of devotees.</p>
-        <p>Serpent worship in Kerala is an ancient Dravidian tradition. Families come here seeking <strong>fertility, family harmony, and relief from Sarpa Dosha</strong>. The sound of the flowing Neyyar River amplifies the divine energy of the grove and carries the prayers of devotees forward.</p>
-      </div>
-      <div class="kavu-rituals reveal">
-        <div class="ritual-card">
-          <h4>Avani Masa Nagar Pooja</h4>
-          <p>Consecration ceremony of serpent deities performed by temple priests with elaborate rituals, mantras, and offerings of turmeric, milk, and flowers.</p>
-        </div>
-        <div class="ritual-card">
-          <h4>Ayilyam Pooja</h4>
-          <p>Special puja performed on Ayilya nakshatra days — the most auspicious time to worship Naga Devatas and seek relief from ancestral curses.</p>
-          <span class="ritual-tag">Monthly · Ayilyam star</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FESTIVALS -->
+<!-- ═══════════════ FESTIVALS ═══════════════ -->
 <section id="festivals">
-  <div class="inner">
-    <div class="section-tag reveal">Throughout the year</div>
-    <h2 class="section-title reveal">Sacred festivals</h2>
-    <div class="festival-list reveal">
-      <div class="festival-row">
-        <div class="festival-row-name">Vishu</div>
-        <div class="festival-row-desc">The Malayalam New Year, celebrated with Vishukkani — an auspicious arrangement of golden cucumbers, golden cassia flowers, and fruits before the deity at dawn.</div>
-        <div class="festival-row-month">April<br/>Medam</div>
+  <div class="section-inner">
+    <h2 class="section-heading reveal">Sacred Festivals</h2>
+    <p class="section-ornament reveal" aria-hidden="true">✦ ✦ ✦</p>
+    <div class="gold-rule reveal" aria-hidden="true"></div>
+    <div class="festival-grid">
+
+      <div class="festival-card reveal">
+        <div class="icon" aria-hidden="true">🌼🪔🌼</div>
+        <h3>Vishu</h3>
+        <p>The Malayalam New Year, celebrated with Vishukkani — an auspicious arrangement of golden cucumbers, golden cassia flowers, and fruits before the deity at dawn.</p>
+        <span class="festival-month">📅 April · Medam</span>
       </div>
-      <div class="festival-row">
-        <div class="festival-row-name">Prathishta Varshikam</div>
-        <div class="festival-row-desc">Annual anniversary commemorating the sacred consecration of the presiding deity. Special abhishekams, homams, and offerings mark this day of deep gratitude.</div>
-        <div class="festival-row-month">May–June<br/>Idavam</div>
+
+      <div class="festival-card reveal">
+        <div class="icon" aria-hidden="true">🪔🪷🪔</div>
+        <h3>Prathishta Varshikam</h3>
+        <p>The annual anniversary commemorating the sacred consecration of the presiding deity. Special abhishekams, homams, and offerings mark this day of deep gratitude and renewal of divine presence in the temple.</p>
+        <span class="festival-month">📅 May–June · Idavam</span>
       </div>
-      <div class="festival-row">
-        <div class="festival-row-name">Krishnashtami</div>
-        <div class="festival-row-desc">Birth anniversary of Lord Krishna, celebrated with great devotion through night-long bhajans, Dahi Handi, and elaborate decorations of the sanctum.</div>
-        <div class="festival-row-month">August<br/>Chingam</div>
+
+      <div class="festival-card reveal">
+        <div class="icon" aria-hidden="true">🪔🪈🪔</div>
+        <h3>Krishnashtami</h3>
+        <p>The birth anniversary of Lord Krishna, celebrated with great devotion through night-long bhajans, Dahi Handi, and elaborate decorations of the sanctum.</p>
+        <span class="festival-month">📅 August · Chingam</span>
       </div>
-      <div class="festival-row">
-        <div class="festival-row-name">Vinayaka Chaturthi</div>
-        <div class="festival-row-desc">Joyous birth celebration of Lord Ganapathy. The temple is adorned with flowers and banana leaves, with special modaka offerings, homams, and ashtadravya abhishekam.</div>
-        <div class="festival-row-month">Aug–Sep<br/>Chingam</div>
+
+      <div class="festival-card reveal">
+        <div class="icon" aria-hidden="true">🪷🕉️🪷</div>
+        <h3>Vinayaka Chaturthi</h3>
+        <p>The joyous birth celebration of Lord Ganapathy, the remover of obstacles. The temple is adorned with flowers and banana leaves, and special modaka offerings, homams, and ashtadravya abhishekam are performed. Devotees throng for the darshan of the beautifully decorated deity, seeking blessings for new beginnings.</p>
+        <span class="festival-month">📅 August–September · Chingam</span>
       </div>
-      <div class="festival-row">
-        <div class="festival-row-name">Vaikunta Ekadasi</div>
-        <div class="festival-row-desc">Most sacred day in the Vaishnava calendar, marking the opening of the celestial gates. Devotees observe a fast and gather for midnight puja and the symbolic passage through Vaikunta Dwaram.</div>
-        <div class="festival-row-month">Dec–Jan<br/>Dhanu</div>
+
+      <div class="festival-card reveal">
+        <div class="icon" aria-hidden="true">🪷🚪🪷</div>
+        <h3>Vaikunta Ekadasi</h3>
+        <p>One of the most sacred days in the Vaishnava calendar, marking the opening of the celestial gates of Vaikunta — the abode of Lord Vishnu. Devotees observe a strict fast and gather at the temple for special midnight puja, dwadasi prasad, and the symbolic passage through the <em>Vaikunta Dwaram</em> (divine gateway), believing this grants liberation from the cycle of rebirth.</p>
+        <span class="festival-month">📅 December–January · Dhanu / Vrishchikam</span>
       </div>
-      <div class="festival-row">
-        <div class="festival-row-name">Mandala Pooja</div>
-        <div class="festival-row-desc">Sacred 41-day period of intensified worship beginning on the first day of Vrischikam. Each day sees chanting of Sree Vishnu Sahasranam, Suktams — Durga, Sree, Purusha — and Shiva Kavacham.</div>
-        <div class="festival-row-month">Nov–Dec<br/>Vrishchikam</div>
+
+      <div class="festival-card reveal">
+        <div class="icon" aria-hidden="true">🪔🔔🪔</div>
+        <h3>Mandala Pooja</h3>
+        <p>A sacred 41-day period of intensified worship beginning on the first day of Vrischikam (November), coinciding with the Mandala season observed across Kerala temples. Each day sees chanting - Sree Vishnu Sahasranam, Suktams - Durga,Sree,Purusha and Shiva Kavacham. The season culminates in the grand Mandala Pooja with elaborate rituals, flower offerings.</p>
+        <span class="festival-month">📅 November–December · Vrishchikam</span>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- TIMINGS -->
+<!-- ═══════════════ TIMINGS ═══════════════ -->
 <section id="timings">
-  <div class="inner">
-    <div class="section-tag centered reveal">Daily schedule</div>
-    <h2 class="section-title centered reveal">Darshan &amp; pooja timings</h2>
-    <div class="timings-wrap reveal">
-      <div class="timing-session">
-        <div class="timing-session-header">
-          <div class="timing-dot" aria-hidden="true"></div>
-          <span>Morning session</span>
-        </div>
-        <div class="timing-item">
-          <div class="timing-name-block">
-            <div class="name">Nirmalyam</div>
-            <div class="ml" lang="ml">നിർമ്മാല്യദർശനം</div>
-          </div>
-          <div class="timing-time">5:30 AM</div>
-          <div class="timing-note">First viewing</div>
-        </div>
-        <div class="timing-item">
-          <div class="timing-name-block">
-            <div class="name">Thiruvanandal</div>
-            <div class="ml" lang="ml">തിരുവനന്ദൽ</div>
-          </div>
-          <div class="timing-time">5:45 AM</div>
-          <div class="timing-note">Abhishekam</div>
-        </div>
-        <div class="timing-item">
-          <div class="timing-name-block">
-            <div class="name">Usha Pooja</div>
-            <div class="ml" lang="ml">ഉഷ പൂജ</div>
-          </div>
-          <div class="timing-time">6:00 AM</div>
-          <div class="timing-note">Morning offering</div>
-        </div>
-        <div class="timing-item">
-          <div class="timing-name-block">
-            <div class="name">Temple closes</div>
-            <div class="ml" lang="ml">ക്ഷേത്രം അടക്കൽ</div>
-          </div>
-          <div class="timing-time">8:30 AM</div>
-          <div class="timing-note">Afternoon break</div>
-        </div>
-      </div>
-      <div class="timing-session">
-        <div class="timing-session-header">
-          <div class="timing-dot" aria-hidden="true"></div>
-          <span>Evening session</span>
-        </div>
-        <div class="timing-item">
-          <div class="timing-name-block">
-            <div class="name">Evening opening</div>
-            <div class="ml" lang="ml">വൈകുന്നേരം തുറക്കൽ</div>
-          </div>
-          <div class="timing-time">5:30 PM</div>
-          <div class="timing-note">Darshan begins</div>
-        </div>
-        <div class="timing-item highlight">
-          <div class="timing-name-block">
-            <div class="name">Deeparadhana</div>
-            <div class="ml" lang="ml">ദീപാരാധന</div>
-          </div>
-          <div class="timing-time">6:30 PM</div>
-          <div class="timing-note">Most auspicious</div>
-        </div>
-        <div class="timing-item">
-          <div class="timing-name-block">
-            <div class="name">Temple closes</div>
-            <div class="ml" lang="ml">ക്ഷേത്രം അടക്കൽ</div>
-          </div>
-          <div class="timing-time">7:30 PM</div>
-          <div class="timing-note">Night closure</div>
-        </div>
-      </div>
-    </div>
-    <p class="timings-note reveal">Timings may vary on festival days. Please confirm with the temple office.</p>
+  <div class="section-inner">
+    <h2 class="section-heading reveal">Darshan &amp; Pooja Timings</h2>
+    <p class="section-ornament reveal" aria-hidden="true">☸ ✦ ☸</p>
+    <div class="gold-rule reveal" aria-hidden="true"></div>
+    <table class="timings-table reveal" aria-label="Daily pooja and darshan timings">
+      <thead>
+        <tr>
+          <th scope="col">Pooja / Seva</th>
+          <th scope="col">Time</th>
+          <th scope="col">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Morning session -->
+        <tr class="session-label">
+          <td colspan="3">🌅 Morning Session</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="timing-name">Nirmalyam</span>
+            <span class="timing-ml" lang="ml">നിർമ്മാല്യദർശനം</span>
+          </td>
+          <td>5:30 AM</td>
+          <td>First viewing of the deity</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="timing-name">Thiruvanandal</span>
+            <span class="timing-ml" lang="ml">തിരുവനന്ദൽ</span>
+          </td>
+          <td>5:45 AM</td>
+          <td>Morning abhishekam</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="timing-name">Usha Pooja</span>
+            <span class="timing-ml" lang="ml">ഉഷ പൂജ</span>
+          </td>
+          <td>6:00 AM</td>
+          <td>Morning offering</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="timing-name">Temple Closes</span>
+            <span class="timing-ml" lang="ml">ക്ഷേത്രം അടക്കൽ</span>
+          </td>
+          <td>8:30 AM</td>
+          <td>Afternoon break</td>
+        </tr>
+        <!-- Evening session -->
+        <tr class="session-label">
+          <td colspan="3">🌇 Evening Session</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="timing-name">Evening Opening</span>
+            <span class="timing-ml" lang="ml">വൈകുന്നേരം തുറക്കൽ</span>
+          </td>
+          <td>5:30 PM</td>
+          <td>Evening darshan begins</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="timing-name">Deeparadhana</span>
+            <span class="timing-ml" lang="ml">ദീപാരാധന</span>
+          </td>
+          <td>6:30 PM</td>
+          <td>Lamp offering — most auspicious</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="timing-name">Temple Closes</span>
+            <span class="timing-ml" lang="ml">ക്ഷേത്രം അടക്കൽ</span>
+          </td>
+          <td>7:30 PM</td>
+          <td>Night closure</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:1.5rem; font-size:0.9rem; color:var(--ink-faint); text-align:center; font-style:italic;">
+      ✦ Timings may vary on festival days and special occasions. Please confirm with the temple office.
+    </p>
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- ═══════════════ CONTACT ═══════════════ -->
 <section id="contact">
-  <div class="inner">
-    <div class="section-tag reveal">Find us</div>
-    <h2 class="section-title reveal">Visit &amp; contact</h2>
-    <div class="contact-layout">
-      <div class="contact-info reveal">
-        <div class="contact-item">
-          <div class="contact-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-          </div>
+  <div class="section-inner">
+    <h2 class="section-heading reveal">Visit &amp; Contact</h2>
+    <p class="section-ornament reveal" aria-hidden="true">❧ ✦ ❧</p>
+    <div class="gold-rule reveal" aria-hidden="true"></div>
+    <div style="display:flex; justify-content:center;">
+      <div class="contact-box reveal">
+        <div class="contact-row">
+          <span class="contact-icon" aria-hidden="true">📍</span>
           <div>
-            <div class="contact-item-label">Address</div>
-            <div class="contact-item-value">President, Krishnapuram Brahmana Samudayam,<br/>Neyyattinkara, Trivandrum,<br/>Kerala — 695121</div>
+            <span class="contact-label">Address</span>
+            <span class="contact-value">President, Krishnapuram Brahmana Samudayam,<br/>Neyyattinkara, Trivandrum,<br/>Kerala — 695121</span>
           </div>
         </div>
-        <div class="contact-item">
-          <div class="contact-icon-wrap">
-            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
-          </div>
+        <div class="contact-row">
+          <span class="contact-icon" aria-hidden="true">✉️</span>
           <div>
-            <div class="contact-item-label">Email</div>
-            <div class="contact-item-value"><a href="mailto:kpbs.nta@gmail.com">kpbs.nta@gmail.com</a></div>
+            <span class="contact-label">Email</span>
+            <a href="mailto:kpbs.nta@gmail.com" style="color:var(--ink-soft); font-size:1rem;">kpbs.nta@gmail.com</a>
           </div>
         </div>
-        <div class="contact-item">
-          <div class="contact-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
+        <div class="contact-row">
+          <span class="contact-icon" aria-hidden="true">🕍</span>
           <div>
-            <div class="contact-item-label">Governing body</div>
-            <div class="contact-item-value">Krishnapuram Brahmana Samudayam,<br/>Neyyattinkara, Trivandrum, India</div>
+            <span class="contact-label">Governing Body</span>
+            <span class="contact-value">Krishnapuram Brahmana Samudayam,<br/>Neyyattinkara, Trivandrum, India<br/>Kerala — 695121</span>
           </div>
         </div>
       </div>
-      <div class="reveal">
-        <div class="map-wrap">
-          <iframe
-            title="Temple location on Google Maps"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3947.082768860548!2d77.0901725754405!3d8.393520191644589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05ae85a0b11b3b%3A0xb2e2bcd8fec7a99!2sKrishnapuram%20Gramam%20Bhramana%20Samudayam!5e0!3m2!1sen!2sin!4v1776927526855!5m2!1sen!2sin"
-            allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </div>
-      </div>
+    </div>
+
+    <div style="margin-top: 2.5rem; padding: 0 1rem;">
+      <iframe
+        title="Temple location on Google Maps"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3947.082768860548!2d77.0901725754405!3d8.393520191644589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05ae85a0b11b3b%3A0xb2e2bcd8fec7a99!2sKrishnapuram%20Gramam%20Bhramana%20Samudayam!5e0!3m2!1sen!2sin!4v1776927526855!5m2!1sen!2sin"
+        width="100%"
+        height="350"
+        style="border: 1px solid rgba(168,117,42,0.3); border-radius: 8px; opacity: 0.95; display: block;"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
     </div>
   </div>
 </section>
 
-<!-- GALLERY -->
+<!-- ═══════════════ GALLERY ═══════════════ -->
 <section id="gallery">
-  <div class="inner">
-    <div class="section-tag centered reveal">Temple photography</div>
-    <h2 class="section-title centered reveal">Gallery</h2>
-    <div class="gallery-grid reveal" role="list" aria-label="Temple photo gallery">
-      <div class="gallery-item" role="listitem" onclick="openLightbox(this,'gallery')" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(this,'gallery')">
-        <img src="IMG_1745.jpeg" alt="Temple entrance adorned with flowers and lamps"/>
-        <div class="gallery-item-overlay"><span>Temple entrance</span></div>
+  <div class="section-inner">
+    <h2 class="section-heading reveal">Gallery</h2>
+    <p class="section-ornament reveal" aria-hidden="true">❧ ✦ ❧</p>
+    <div class="gold-rule reveal" aria-hidden="true"></div>
+
+    <div class="gallery-grid" style="overflow: visible; padding: 3rem 1rem;" role="list" aria-label="Temple photo gallery">
+      <div class="gallery-item reveal" role="listitem">
+        <img
+          src="IMG_1745.jpeg"
+          alt="Temple entrance adorned with flowers and lamps during a festival"
+          onclick="openLightbox(this, 'gallery')"
+          tabindex="0"
+          onkeydown="if(event.key==='Enter'||event.key===' ')openLightbox(this,'gallery')"
+        />
       </div>
-      <div class="gallery-item" role="listitem" onclick="openLightbox(this,'gallery')" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(this,'gallery')">
-        <img src="IMG_1747.jpeg" alt="Sanctum sanctorum with deity illuminated by oil lamps"/>
-        <div class="gallery-item-overlay"><span>Sanctum sanctorum</span></div>
+      <div class="gallery-item reveal" role="listitem">
+        <img
+          src="IMG_1747.jpeg"
+          alt="Sanctum sanctorum with deity illuminated by oil lamps"
+          onclick="openLightbox(this, 'gallery')"
+          tabindex="0"
+          onkeydown="if(event.key==='Enter'||event.key===' ')openLightbox(this,'gallery')"
+        />
       </div>
-      <div class="gallery-item" role="listitem" onclick="openLightbox(this,'gallery')" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(this,'gallery')">
-        <img src="IMG_1739.jpeg" alt="Temple premises and Neyyar River surroundings"/>
-        <div class="gallery-item-overlay"><span>Temple premises</span></div>
+      <div class="gallery-item reveal" role="listitem">
+        <img
+          src="IMG_1739.jpeg"
+          alt="Temple premises and surrounding natural greenery by Neyyar River"
+          onclick="openLightbox(this, 'gallery')"
+          tabindex="0"
+          onkeydown="if(event.key==='Enter'||event.key===' ')openLightbox(this,'gallery')"
+        />
       </div>
-      <div class="gallery-item" role="listitem" onclick="openLightbox(this,'gallery')" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(this,'gallery')">
-        <img src="Image_10.jpeg" alt="Temple grounds"/>
-        <div class="gallery-item-overlay"><span>Temple grounds</span></div>
+      <div class="gallery-item reveal" role="listitem">
+        <img
+          src="Image_10.jpeg"
+          alt="Temple premises and surrounding natural greenery by Neyyar River"
+          onclick="openLightbox(this, 'gallery')"
+          tabindex="0"
+          onkeydown="if(event.key==='Enter'||event.key===' ')openLightbox(this,'gallery')"
+        />
       </div>
-      <div class="gallery-item" role="listitem" onclick="openLightbox(this,'gallery')" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(this,'gallery')">
-        <img src="Image_11.jpeg" alt="Temple during festival"/>
-        <div class="gallery-item-overlay"><span>Festival time</span></div>
+      <div class="gallery-item reveal" role="listitem">
+        <img
+          src="Image_11.jpeg"
+          alt="Temple premises and surrounding natural greenery by Neyyar River"
+          onclick="openLightbox(this, 'gallery')"
+          tabindex="0"
+          onkeydown="if(event.key==='Enter'||event.key===' ')openLightbox(this,'gallery')"
+        />
       </div>
-      <div class="gallery-item" role="listitem" onclick="openLightbox(this,'gallery')" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(this,'gallery')">
-        <img src="Image_12.jpeg" alt="Ritual offerings"/>
-        <div class="gallery-item-overlay"><span>Ritual offerings</span></div>
+      <div class="gallery-item reveal" role="listitem">
+        <img
+          src="Image_12.jpeg"
+          alt="Temple premises and surrounding natural greenery by Neyyar River"
+          onclick="openLightbox(this, 'gallery')"
+          tabindex="0"
+          onkeydown="if(event.key==='Enter'||event.key===' ')openLightbox(this,'gallery')"
+        />
       </div>
-      <div class="gallery-item" role="listitem" onclick="openLightbox(this,'gallery')" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(this,'gallery')">
-        <img src="Image_13.jpeg" alt="Temple surroundings"/>
-        <div class="gallery-item-overlay"><span>Sacred surroundings</span></div>
+      <div class="gallery-item reveal" role="listitem">
+        <img
+          src="Image_13.jpeg"
+          alt="Temple premises and surrounding natural greenery by Neyyar River"
+          onclick="openLightbox(this, 'gallery')"
+          tabindex="0"
+          onkeydown="if(event.key==='Enter'||event.key===' ')openLightbox(this,'gallery')"
+        />
       </div>
-      <div class="gallery-item" role="listitem" onclick="openLightbox(this,'gallery')" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(this,'gallery')">
-        <img src="Image_14.jpeg" alt="Nagar Kavu grove"/>
-        <div class="gallery-item-overlay"><span>Nagar Kavu</span></div>
+      <div class="gallery-item reveal" role="listitem">
+        <img
+          src="Image_14.jpeg"
+          alt="Temple premises and surrounding natural greenery by Neyyar River"
+          onclick="openLightbox(this, 'gallery')"
+          tabindex="0"
+          onkeydown="if(event.key==='Enter'||event.key===' ')openLightbox(this,'gallery')"
+        />
       </div>
     </div>
   </div>
 </section>
 
-<!-- LIGHTBOX -->
-<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" onclick="closeLightbox()">
-  <button id="lb-prev" class="lb-btn" aria-label="Previous" onclick="event.stopPropagation();changeImage(-1)">&#8249;</button>
-  <img id="lightbox-img" src="" alt=""/>
-  <button id="lb-next" class="lb-btn" aria-label="Next" onclick="event.stopPropagation();changeImage(1)">&#8250;</button>
-  <button id="lb-close" class="lb-btn" aria-label="Close" onclick="event.stopPropagation();closeLightbox()">&times;</button>
+<!-- ═══════════════ UNIFIED LIGHTBOX ═══════════════ -->
+<div
+  id="lightbox"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Image viewer"
+  onclick="closeLightbox()"
+>
+  <button id="lb-prev" class="lb-btn" aria-label="Previous image" onclick="event.stopPropagation(); changeImage(-1)">&#8249;</button>
+
+  <img id="lightbox-img" src="" alt="" />
+
+  <button id="lb-next" class="lb-btn" aria-label="Next image" onclick="event.stopPropagation(); changeImage(1)">&#8250;</button>
+
+  <button id="lb-close" class="lb-btn" aria-label="Close image viewer" onclick="event.stopPropagation(); closeLightbox()">&times;</button>
+
   <div id="lb-counter" aria-live="polite"></div>
 </div>
 
-<!-- FOOTER -->
+<!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
-  <p class="foot-title">Sree Krishna Temple</p>
-  <p class="ml" lang="ml">ശ്രീ കൃഷ്ണ ക്ഷേത്രം · Krishnapuram Brahmana Samudayam</p>
-  <p style="margin-top:0.75rem;">© 2026 Krishnapuram Brahmana Samudayam, Neyyattinkara</p>
-  <p style="margin-top:0.25rem;font-size:0.72rem;opacity:0.6;">Hare Krishna · Hare Rama · Jai Shri Krishna</p>
+  <div class="footer-om" aria-hidden="true">🦚</div>
+  <p>© 2026 Krishnapuram Brahmana Samudayam, Neyyattinkara
+    <span lang="ml"> — ശ്രീ കൃഷ്ണ ക്ഷേത്രം</span>
+  </p>
+  <p style="margin-top:0.4rem; font-size:0.75rem;">Hare Krishna · Hare Rama · Jai Shri Krishna</p>
 </footer>
 
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
 <script>
-(function(){
-  const sections = document.querySelectorAll('section[id]');
-  const links = document.querySelectorAll('nav a');
-  new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if(e.isIntersecting) {
-        const id = e.target.id;
-        links.forEach(a => a.classList.toggle('active', a.getAttribute('href')==='#'+id));
-      }
-    });
-  },{threshold:0.3}).observe && sections.forEach(s=>
-    new IntersectionObserver(entries=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          const id=e.target.id;
-          links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id));
+  /* ── Active nav on scroll ── */
+  (function () {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav a');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(a => {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+          });
         }
       });
-    },{threshold:0.3}).observe(s)
-  );
-})();
+    }, { threshold: 0.35 });
 
-(function(){
-  const els = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);} });
-  },{threshold:0.1});
-  els.forEach(el=>io.observe(el));
-})();
+    sections.forEach(s => observer.observe(s));
+  })();
 
-let currentImages=[], currentIndex=0;
-function openLightbox(el, ctx){
-  currentImages = ctx==='gallery'
-    ? Array.from(document.querySelectorAll('.gallery-item img'))
-    : [el.tagName==='IMG'?el:el.querySelector('img')];
-  const img = el.tagName==='IMG'?el:el.querySelector('img');
-  currentIndex = currentImages.indexOf(img);
-  if(currentIndex<0) currentIndex=0;
-  document.getElementById('lightbox').classList.add('open');
-  document.body.style.overflow='hidden';
-  updateLightbox();
-}
-function closeLightbox(){
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow='';
-}
-function changeImage(dir){
-  currentIndex = Math.max(0, Math.min(currentImages.length-1, currentIndex+dir));
-  updateLightbox();
-}
-function updateLightbox(){
-  const img = currentImages[currentIndex];
-  const lb = document.getElementById('lightbox-img');
-  lb.src = img.src; lb.alt = img.alt;
-  document.getElementById('lb-counter').textContent = currentImages.length>1 ? (currentIndex+1)+' / '+currentImages.length : '';
-  document.getElementById('lb-prev').disabled = currentIndex===0;
-  document.getElementById('lb-next').disabled = currentIndex===currentImages.length-1;
-  ['lb-prev','lb-next'].forEach(id=>{
-    document.getElementById(id).style.display = currentImages.length<=1?'none':'flex';
+  /* ── Scroll reveal ── */
+  (function () {
+    const els = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+  })();
+
+  /* ── Unified Lightbox ── */
+  let currentIndex = 0;
+  let currentImages = [];
+
+  function openLightbox(img, context) {
+    if (context === 'gallery') {
+      currentImages = Array.from(document.querySelectorAll('.gallery-item img'));
+    } else {
+      currentImages = [img];
+    }
+    currentIndex = currentImages.indexOf(img);
+    if (currentIndex < 0) currentIndex = 0;
+
+    const lb = document.getElementById('lightbox');
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    updateLightbox();
+
+    // Trap focus to lightbox
+    document.getElementById('lb-close').focus();
+  }
+
+  function closeLightbox() {
+    const lb = document.getElementById('lightbox');
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function changeImage(dir) {
+    currentIndex += dir;
+    if (currentIndex < 0) currentIndex = 0;
+    if (currentIndex >= currentImages.length) currentIndex = currentImages.length - 1;
+    updateLightbox();
+  }
+
+  function updateLightbox() {
+    const img = currentImages[currentIndex];
+    const lbImg = document.getElementById('lightbox-img');
+
+    // Re-trigger animation
+    lbImg.style.animation = 'none';
+    lbImg.offsetHeight; // reflow
+    lbImg.style.animation = '';
+
+    lbImg.src = img.src;
+    lbImg.alt = img.alt;
+
+    document.getElementById('lb-counter').textContent =
+      currentImages.length > 1 ? (currentIndex + 1) + ' / ' + currentImages.length : '';
+
+    const prevBtn = document.getElementById('lb-prev');
+    const nextBtn = document.getElementById('lb-next');
+
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex === currentImages.length - 1;
+
+    // Hide nav buttons when only one image
+    prevBtn.style.display = currentImages.length <= 1 ? 'none' : 'flex';
+    nextBtn.style.display = currentImages.length <= 1 ? 'none' : 'flex';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowRight') changeImage(1);
+    if (e.key === 'ArrowLeft')  changeImage(-1);
   });
-}
-document.addEventListener('keydown',e=>{
-  if(!document.getElementById('lightbox').classList.contains('open')) return;
-  if(e.key==='Escape') closeLightbox();
-  if(e.key==='ArrowRight') changeImage(1);
-  if(e.key==='ArrowLeft') changeImage(-1);
-});
 </script>
+
 </body>
 </html>
