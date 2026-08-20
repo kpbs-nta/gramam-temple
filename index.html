@@ -270,6 +270,107 @@
       color: var(--ink-soft);
     }
 
+    /* ─── UPCOMING FESTIVALS (NEW) ─── */
+    #upcoming {
+      background: radial-gradient(ellipse at top, var(--gold-pale) 0%, var(--cream) 55%, var(--cream) 100%);
+    }
+    .upcoming-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .upcoming-card {
+      background: var(--paper);
+      border: 1px solid rgba(168,117,42,0.3);
+      border-top: 4px solid var(--vermilion);
+      border-radius: 4px;
+      padding: 2rem 1.75rem;
+      box-shadow: 0 8px 28px rgba(139,90,26,0.1);
+    }
+    .upcoming-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.35rem;
+      flex-wrap: wrap;
+    }
+    .upcoming-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.2rem;
+      color: var(--maroon-deep);
+    }
+    .upcoming-date-badge {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: #fff;
+      background: var(--vermilion);
+      padding: 0.35rem 0.75rem;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+    .upcoming-subtitle {
+      font-size: 0.85rem;
+      color: var(--ink-faint);
+      margin-bottom: 1.25rem;
+      font-style: italic;
+    }
+    .upcoming-programme-label {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--saffron);
+      margin: 1.1rem 0 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .upcoming-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .upcoming-list li {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      padding-bottom: 0.55rem;
+      border-bottom: 1px dashed rgba(168,117,42,0.25);
+    }
+    .upcoming-list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .upcoming-time {
+      flex-shrink: 0;
+      font-weight: 600;
+      color: var(--gold-deep);
+      min-width: 82px;
+    }
+    .upcoming-note {
+      margin-top: 1.1rem;
+      padding: 0.85rem 1rem;
+      background: rgba(168,117,42,0.08);
+      border: 1px solid rgba(168,117,42,0.25);
+      border-radius: 2px;
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+    .draft-banner {
+      background: var(--vermilion);
+      color: #fff;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
     /* ─── FESTIVALS ─── */
     #festivals {
       background: linear-gradient(180deg, var(--cream), var(--cream-2), var(--cream));
@@ -420,14 +521,12 @@
       box-shadow: 0 4px 20px rgba(139,90,26,0.18);
       position: relative;
       z-index: 1;
-      /* Desktop: smooth hover zoom */
       transition:
         transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
         box-shadow 0.45s ease,
         filter 0.45s ease;
     }
 
-    /* Hover zoom only on non-touch devices */
     @media (hover: hover) and (pointer: fine) {
       .gallery-item img:hover {
         transform: scale(1.55);
@@ -439,7 +538,6 @@
       }
     }
 
-    /* Touch devices: subtle press feedback instead */
     @media (hover: none) {
       .gallery-item img:active {
         filter: brightness(1.05) saturate(1.1);
@@ -464,7 +562,6 @@
       align-items: center;
       justify-content: center;
       cursor: zoom-out;
-      /* Fade in */
       animation: lbFadeIn 0.25s ease both;
     }
     #lightbox.open { display: flex; }
@@ -551,12 +648,13 @@
 </head>
 <body>
 
+<div class="draft-banner">🚧 DRAFT PREVIEW — Upcoming Festivals section added below for your review 🚧</div>
+
 <!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero" id="home">
   <div class="hero-lotus" aria-hidden="true">
     <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
       <g fill="none" stroke-linecap="round">
-        <!-- outer ring of petals -->
         <g stroke="#b83a24" stroke-width="1" opacity="0.14">
           <path d="M300 300 C300 190 350 120 300 40 C250 120 300 190 300 300 Z" transform="rotate(0 300 300)"/>
           <path d="M300 300 C300 190 350 120 300 40 C250 120 300 190 300 300 Z" transform="rotate(30 300 300)"/>
@@ -571,7 +669,6 @@
           <path d="M300 300 C300 190 350 120 300 40 C250 120 300 190 300 300 Z" transform="rotate(300 300 300)"/>
           <path d="M300 300 C300 190 350 120 300 40 C250 120 300 190 300 300 Z" transform="rotate(330 300 300)"/>
         </g>
-        <!-- inner ring of petals -->
         <g stroke="#ab7a2e" stroke-width="1.2" opacity="0.22">
           <path d="M300 300 C300 225 335 175 300 120 C265 175 300 225 300 300 Z" transform="rotate(15 300 300)"/>
           <path d="M300 300 C300 225 335 175 300 120 C265 175 300 225 300 300 Z" transform="rotate(45 300 300)"/>
@@ -586,7 +683,6 @@
           <path d="M300 300 C300 225 335 175 300 120 C265 175 300 225 300 300 Z" transform="rotate(315 300 300)"/>
           <path d="M300 300 C300 225 335 175 300 120 C265 175 300 225 300 300 Z" transform="rotate(345 300 300)"/>
         </g>
-        <!-- soft outer circle -->
         <circle cx="300" cy="300" r="270" stroke="#ab7a2e" stroke-width="1" opacity="0.12"/>
         <circle cx="300" cy="300" r="230" stroke="#b83a24" stroke-width="0.8" opacity="0.12"/>
       </g>
@@ -624,6 +720,7 @@
   <a href="#about">About</a>
   <a href="#deity">Deities</a>
   <a href="#nagarkavu">Nagar Kavu</a>
+  <a href="#upcoming">Upcoming</a>
   <a href="#festivals">Festivals</a>
   <a href="#timings">Timings</a>
   <a href="#contact">Contact</a>
@@ -768,6 +865,7 @@
         <div class="icon" aria-hidden="true">🐍</div>
         <h3>Avani Masa Nagar Pooja</h3>
         <p>The consecration ceremony of serpent deities performed by temple priests with elaborate rituals, mantras, and offerings of turmeric, milk, and flowers.</p>
+        <span class="festival-month">📅 Sept 6, 2026 · Sunday — see full programme below</span>
       </div>
       <div class="festival-card reveal">
         <div class="icon" aria-hidden="true">🌿</div>
@@ -776,6 +874,72 @@
         <span class="festival-month">📅 Monthly · Ayilyam Star</span>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════════ UPCOMING FESTIVALS (NEW SECTION) ═══════════════ -->
+<section id="upcoming">
+  <div class="section-inner">
+    <h2 class="section-heading reveal">Upcoming Festivals</h2>
+    <p class="section-ornament reveal" aria-hidden="true">🪔 ✦ 🪔</p>
+    <div class="gold-rule reveal" aria-hidden="true"></div>
+
+    <div class="upcoming-grid">
+
+      <!-- Sree Krishna Jayanti -->
+      <div class="upcoming-card reveal">
+        <div class="upcoming-head">
+          <span class="upcoming-title">Sree Krishna Jayanti <span style="color:var(--ink-faint); font-weight:400; font-size:0.85em;">(Janmashtami / Ashtami Rohini)</span></span>
+          <span class="upcoming-date-badge">Sept 4, 2026 · Friday</span>
+        </div>
+        <p class="upcoming-subtitle">The birth anniversary of Lord Sree Krishna</p>
+
+        <p class="upcoming-programme-label">🌅 Morning Programme</p>
+        <ul class="upcoming-list">
+          <li><span class="upcoming-time">5:30 AM</span><span>Ganapathy Homam</span></li>
+          <li><span class="upcoming-time">7:30 AM</span><span>Sudarshana Homam with Kudumba Archana</span></li>
+        </ul>
+
+        <div class="upcoming-note">
+          <strong style="color:var(--gold-deep);">Kudumba Archana Registration</strong><br/>
+          Families wishing to participate in the Sudarshana Homam Kudumba Archana should register with the following details:
+          <ul style="margin:0.5rem 0 0 1.1rem; list-style: disc;">
+            <li>Nakshatram (Birth Star)</li>
+            <li>Gothram (Lineage)</li>
+          </ul>
+          Offering: ₹500 per family<br/>
+          You may also register by <a href="mailto:kpbs.nta@gmail.com?subject=Kudumba%20Archana%20Registration%20-%20Krishna%20Jayanti%202026" style="color:var(--gold-deep); font-weight:600;">replying by email</a> with your Nakshatram and Gothram — a confirmation will be sent to acknowledge your registration.
+        </div>
+
+        <p class="upcoming-programme-label">🌇 Evening Programme</p>
+        <ul class="upcoming-list">
+          <li><span class="upcoming-time">6:30 PM</span><span>Bhagavathi Seva</span></li>
+          <li><span class="upcoming-time">7:30 PM</span><span>Kalasha Pooja</span></li>
+          <li><span class="upcoming-time">10:00 PM</span><span>Vahana Ezhunallippu (Grama Pradakshinam)</span></li>
+          <li><span class="upcoming-time">—</span><span>Concluding with Deeparadhana</span></li>
+        </ul>
+      </div>
+
+      <!-- Avani Masa Nagar Pooja -->
+      <div class="upcoming-card reveal">
+        <div class="upcoming-head">
+          <span class="upcoming-title">Avani Masa Nagar Poojai</span>
+          <span class="upcoming-date-badge">Sept 6, 2026 · Sun</span>
+        </div>
+        <p class="upcoming-subtitle">Consecration and worship of the Naga Devatas at the Nagar Kavu</p>
+
+        <p class="upcoming-programme-label">🌅 Morning Programme</p>
+        <ul class="upcoming-list">
+          <li><span class="upcoming-time">7:30 AM</span><span>Nagar Abhishekam</span></li>
+          <li><span class="upcoming-time">9:30 AM</span><span>Deeparadhana</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p style="margin-top:1.5rem; font-size:0.9rem; color:var(--ink-faint); text-align:center; font-style:italic;">
+      ✦ Programme timings are provisional and may be revised closer to the date. Please confirm with the temple office.
+    </p>
   </div>
 </section>
 
@@ -804,8 +968,8 @@
       <div class="festival-card reveal">
         <div class="icon" aria-hidden="true">🪔🪈🪔</div>
         <h3>Krishnashtami</h3>
-        <p>The birth anniversary of Lord Krishna, celebrated with great devotion through night-long bhajans, Dahi Handi, and elaborate decorations of the sanctum.</p>
-        <span class="festival-month">📅 August · Chingam</span>
+        <p>The birth anniversary of Lord Krishna, celebrated with great devotion through Ganapathy Homam, Sudarshana Homam with Kudumba Archana, Bhagavathi Seva, Kalasha Pooja, and Vahana Ezhunallippu around the temple.</p>
+        <span class="festival-month">📅 Sept 4, 2026 · Friday</span>
       </div>
 
       <div class="festival-card reveal">
@@ -848,7 +1012,6 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Morning session -->
         <tr class="session-label">
           <td colspan="3">🌅 Morning Session</td>
         </tr>
@@ -884,7 +1047,6 @@
           <td>8:30 AM</td>
           <td>Afternoon break</td>
         </tr>
-        <!-- Evening session -->
         <tr class="session-label">
           <td colspan="3">🌇 Evening Session</td>
         </tr>
@@ -1081,7 +1243,6 @@
 
 <!-- ═══════════════ SCRIPTS ═══════════════ -->
 <script>
-  /* ── Active nav on scroll ── */
   (function () {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('nav a');
@@ -1100,7 +1261,6 @@
     sections.forEach(s => observer.observe(s));
   })();
 
-  /* ── Scroll reveal ── */
   (function () {
     const els = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver(entries => {
@@ -1114,7 +1274,6 @@
     els.forEach(el => io.observe(el));
   })();
 
-  /* ── Unified Lightbox ── */
   let currentIndex = 0;
   let currentImages = [];
 
@@ -1132,7 +1291,6 @@
     document.body.style.overflow = 'hidden';
     updateLightbox();
 
-    // Trap focus to lightbox
     document.getElementById('lb-close').focus();
   }
 
@@ -1153,9 +1311,8 @@
     const img = currentImages[currentIndex];
     const lbImg = document.getElementById('lightbox-img');
 
-    // Re-trigger animation
     lbImg.style.animation = 'none';
-    lbImg.offsetHeight; // reflow
+    lbImg.offsetHeight;
     lbImg.style.animation = '';
 
     lbImg.src = img.src;
@@ -1170,7 +1327,6 @@
     prevBtn.disabled = currentIndex === 0;
     nextBtn.disabled = currentIndex === currentImages.length - 1;
 
-    // Hide nav buttons when only one image
     prevBtn.style.display = currentImages.length <= 1 ? 'none' : 'flex';
     nextBtn.style.display = currentImages.length <= 1 ? 'none' : 'flex';
   }
